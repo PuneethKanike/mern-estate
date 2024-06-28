@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background-color: rgb(241, 245, 241);
+body {
+  background-color: rgb(241, 245, 241);
 }
+
+body.dark {
+  background-color: #05001c;
+  color: #e0e0e0;
+}
+
+body.dark .bg-slate-200 {
+  background-color: #060027;   
+}
+
+body.dark .bg-slate-100 {
+  background-color: #444;
+}
+
+
+
