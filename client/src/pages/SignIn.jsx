@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
@@ -41,6 +41,16 @@ export default function SignIn() {
       dispatch(signInFailure(error.message));
     }
   };
+
+  useEffect(() => {
+    let timer;
+    if (error) {
+      timer = setTimeout(() => {
+        dispatch(signInFailure('')); // Clear the error message after 5 seconds
+      }, 3000);
+    }
+    return () => clearTimeout(timer); // Clear the timer when the component unmounts
+  }, [error, dispatch]);
 
   return (
     <div className='p-3 pt-20 max-w-lg mx-auto'>

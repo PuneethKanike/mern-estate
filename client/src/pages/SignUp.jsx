@@ -18,33 +18,34 @@ export default function SignUp() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    setLoading(true);
-    const res = await fetch('/api/auth/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (!res.ok) {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
       const data = await res.json();
+      console.log(data);
+      if (data.success === false) {
+        setLoading(false);
+        setError(data.message);
+        return;
+      }
       setLoading(false);
-      setError(data.message);
-      return;
+      setError(null);
+      navigate('/signin');
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
     }
+  };
 
-    const data = await res.json();
-    setLoading(false);
-    setError(null);
-    navigate('/signin');
-  } catch (error) {
-    setLoading(false);
-    setError(error.message);
-  }
-};
+  
+
 
   return (
     <div className='p-3 pt-20 max-w-lg mx-auto'>
