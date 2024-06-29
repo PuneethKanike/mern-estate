@@ -49,6 +49,7 @@ export default function SignIn() {
       <h1 className='text-3xl text-center font-semibold my-7 dark:text-white uppercase'>Sign In</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
+        required
           type='email'
           placeholder='Email'
           className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
@@ -60,6 +61,7 @@ export default function SignIn() {
           placeholder='Password'
           className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
           id='password'
+          required
           onChange={handleChange}
         />
         <button
