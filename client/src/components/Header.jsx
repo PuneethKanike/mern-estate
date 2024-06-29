@@ -40,7 +40,7 @@ function Header({ theme, toggleTheme }) {
             )}
           </Link>
           <li>
-            <button onClick={toggleTheme} className="px-2 py-2 rounded-3xl bg-slate-50 hover:bg-blue-950 hover:text-slate-50 text-slate-700 dark:bg-blue-950 dark:text-white hover:dark:bg-slate-50 dark:hover:text-blue-950">
+            <button onClick={toggleTheme} className="px-2 py-2 rounded-3xl bg-slate-50 hover:bg-blue-950 hover:text-slate-50 text-slate-700 dark:bg-darkblue dark:text-white hover:dark:bg-slate-50 dark:hover:text-darkblue">
               {theme === 'light' ? <FaSun /> : <FaMoon />}
             </button>
           </li>
