@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        darkblue: '#05001c', // Add your custom color here
+      },
+    },
   },
   darkMode: 'class', // Enable class-based dark mode
   plugins: [],

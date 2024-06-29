@@ -124,8 +124,8 @@ export default function Profile() {
   }
 
   return (
-    <div className="p-3 pt-6 max-w-lg mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7 dark:text-white">Profile</h1>
+    <div className="p-3 pt-20 max-w-lg mx-auto">
+      <h1 className="text-3xl font-semibold text-center my-7 dark:text-white uppercase text-slate-500">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input onChange={(e) => setFile(e.target.files[0])} type='file' ref={fileRef} hidden accept="image/*" />
         <img onClick={() => fileRef.current.click()} src={formData.avatar || currentUser.avatar} alt="profile" className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2" />
@@ -145,7 +145,7 @@ export default function Profile() {
         <input onChange={handleChange} defaultValue={currentUser.username} type="text" placeholder="username" id="username" className="border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none" />
         <input onChange={handleChange} defaultValue={currentUser.email} type="email" placeholder="email" id="email" className="border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none" />
         <input onChange={handleChange} type="password" placeholder="password" id="password" className="border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none" />
-        <button disabled={loading} className="bg-slate-700 dark:bg-blue-600 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-70">{loading ? 'Loading...' : 'Update'}</button>
+        <button disabled={loading} className="bg-slate-700 dark:bg-blue-800 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-70">{loading ? 'Loading...' : 'Update'}</button>
       </form>
 
       <div className="flex justify-between mt-5">
