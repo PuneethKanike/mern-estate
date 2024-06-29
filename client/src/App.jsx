@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import Header from './components/Header';
 import PrivacyRouter from './components/PrivacyRouter';
 import { useState, useEffect } from 'react';
+import CreateListing from './pages/CreateListing';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -30,6 +31,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route element={<PrivacyRouter />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/createlisting" element={<CreateListing />} />
         </Route>
       </Routes>
     </BrowserRouter>
