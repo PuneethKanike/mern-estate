@@ -143,10 +143,10 @@ export default function Profile() {
             ''
           )}
         </p>
-        <input onChange={handleChange} defaultValue={currentUser.username} type="text" placeholder="username" id="username" className="border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none" />
-        <input onChange={handleChange} defaultValue={currentUser.email} type="email" placeholder="email" id="email" className="border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none" />
-        <input onChange={handleChange} type="password" placeholder="password" id="password" className="border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none" />
-        <button disabled={loading} className="bg-slate-700 dark:bg-blue-800 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-70">{loading ? 'Loading...' : 'Update'}</button>
+        <input onChange={handleChange} defaultValue={currentUser.username} type="text" placeholder="username" id="username" className="border p-3 rounded-lg bg-gray-200 dark:bg-darkblue text-black dark:text-white " />
+        <input onChange={handleChange} defaultValue={currentUser.email} type="email" placeholder="email" id="email" className="border p-3 rounded-lg bg-gray-200 dark:bg-darkblue text-black dark:text-white" />
+        <input onChange={handleChange} type="password" placeholder="password" id="password" className="border p-3 rounded-lg bg-gray-200 dark:bg-darkblue text-black dark:text-white" />
+        <button disabled={loading} className="text-white dark:text-blue-400 border dark:border-blue-400 bg-blue-900 dark:hover:bg-blue-950 dark:hover:text-blue-200 dark:bg-darkblue rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-70">{loading ? 'Loading...' : 'Update'}</button>
         <Link className='bg-green-900 text-white p-3 rounded-lg uppercase text-center hover:opacity-95' to = {"/createlisting"}>
         Create Listing
         </Link>
