@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   getDownloadURL,
   getStorage,
@@ -8,6 +8,22 @@ import {
 import { app } from '../firebase';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import L from 'leaflet';
+
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import 'leaflet-defaulticon-compatibility';
+
+const defaultIcon = L.icon({
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41],
+});
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -31,7 +47,51 @@ export default function CreateListing() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
+  const [location, setLocation] = useState({ lat: 20.5937, lng: 78.9629 }); // Default to India
+  const [map, setMap] = useState(null);
+  const mapRef = useRef();
+
+  // Update map view when location changes
+  useEffect(() => {
+    if (map) {
+      map.setView(location, 8); // Set zoom level as needed
+    }
+  }, [location, map]);
+
+  // Handle map click events
+  const handleMapClick = (e) => {
+    const { lat, lng } = e.latlng;
+    reverseGeocode(lat, lng).then((placeName) => {
+      if (placeName) {
+        setLocation({ lat, lng });
+        setFormData({
+          ...formData,
+          address: placeName,
+        });
+      }
+    });
+  };
+
+  // Function to reverse geocode coordinates to place name
+  const reverseGeocode = async (lat, lng) => {
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
+      const data = await response.json();
+      return data.display_name;
+    } catch (error) {
+      console.error('Error fetching reverse geocode:', error);
+      return null;
+    }
+  };
+
+  // Component for handling map events
+  const Events = () => {
+    const map = useMapEvents({
+      click: handleMapClick,
+    });
+    return null;
+  };
+
   const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
@@ -153,6 +213,7 @@ export default function CreateListing() {
       setLoading(false);
     }
   };
+
   return (
     <main className='p-3 pt-16 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
@@ -189,6 +250,7 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.address}
           />
+          
           <div className='flex gap-6 flex-wrap'>
             <div className='flex gap-2 '>
               <input
@@ -364,8 +426,18 @@ export default function CreateListing() {
             {loading ? 'Creating...' : 'Create listing'}
           </button>
           {error && <p className='text-red-700 text-sm'>{error}</p>}
+          <MapContainer center={location} zoom={8} style={{ height: '400px' }} whenCreated={setMap} ref={mapRef}>
+          <Events />
+          <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+          <Marker position={location} icon={defaultIcon}>
+            <Popup>Your selected location</Popup>
+          </Marker>
+        </MapContainer>
         </div>
       </form>
+      <div className='map-container mt-6'>
+        
+      </div>
     </main>
   );
 }
