@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import {
   getDownloadURL,
   getStorage,
@@ -8,22 +8,6 @@ import {
 import { app } from '../firebase';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import L from 'leaflet';
-
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import 'leaflet-defaulticon-compatibility';
-
-const defaultIcon = L.icon({
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  tooltipAnchor: [16, -28],
-  shadowSize: [41, 41],
-});
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -47,66 +31,7 @@ export default function CreateListing() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [location, setLocation] = useState(null); // Initially null to handle loading state
-  const [map, setMap] = useState(null);
-  const mapRef = useRef();
-
-  // Get user's current location
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setLocation({ lat: latitude, lng: longitude });
-      },
-      (error) => {
-        console.error('Error getting location:', error);
-        // Set a default location if user denies location access
-        setLocation({ lat: 20.5937, lng: 78.9629 }); // Default to India
-      }
-    );
-  }, []);
-
-  // Update map view when location changes
-  useEffect(() => {
-    if (map && location) {
-      map.setView(location, 8); // Set zoom level as needed
-    }
-  }, [location, map]);
-
-  // Handle map click events
-  const handleMapClick = (e) => {
-    const { lat, lng } = e.latlng;
-    reverseGeocode(lat, lng).then((placeName) => {
-      if (placeName) {
-        setLocation({ lat, lng });
-        setFormData({
-          ...formData,
-          address: placeName,
-        });
-      }
-    });
-  };
-
-  // Function to reverse geocode coordinates to place name
-  const reverseGeocode = async (lat, lng) => {
-    try {
-      const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
-      const data = await response.json();
-      return data.display_name;
-    } catch (error) {
-      console.error('Error fetching reverse geocode:', error);
-      return null;
-    }
-  };
-
-  // Component for handling map events
-  const Events = () => {
-    useMapEvents({
-      click: handleMapClick,
-    });
-    return null;
-  };
-
+  console.log(formData);
   const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
@@ -228,9 +153,8 @@ export default function CreateListing() {
       setLoading(false);
     }
   };
-
   return (
-    <main className='p-3 pt-16 max-w-4xl mx-auto'>
+    <main className='p-3 pt-14 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
         Create a Listing
       </h1>
@@ -265,9 +189,8 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.address}
           />
-          
           <div className='flex gap-6 flex-wrap'>
-            <div className='flex gap-2 '>
+            <div className='flex gap-2'>
               <input
                 type='checkbox'
                 id='sale'
@@ -359,7 +282,7 @@ export default function CreateListing() {
               <div className='flex flex-col items-center'>
                 <p>Regular price</p>
                 {formData.type === 'rent' && (
-                  <span className='text-xs'>(₹ / month)</span>
+                  <span className='text-xs'>($ / month)</span>
                 )}
               </div>
             </div>
@@ -379,7 +302,7 @@ export default function CreateListing() {
                   <p>Discounted price</p>
 
                   {formData.type === 'rent' && (
-                    <span className='text-xs'>(₹ / month)</span>
+                    <span className='text-xs'>($ / month)</span>
                   )}
                 </div>
               </div>
@@ -389,14 +312,14 @@ export default function CreateListing() {
         <div className='flex flex-col flex-1 gap-4'>
           <p className='font-semibold'>
             Images:
-            <span className='font-normal text-gray-600 ml-2 dark:text-slate-500'>
-              The first image will be the cover (max 6, 2mb each)
+            <span className='font-normal text-gray-600 ml-2'>
+              The first image will be the cover (max 6)
             </span>
           </p>
           <div className='flex gap-4'>
             <input
               onChange={(e) => setFiles(e.target.files)}
-              className='p-3 border border-gray-300 rounded w-full '
+              className='p-3 border border-gray-300 rounded w-full'
               type='file'
               id='images'
               accept='image/*'
@@ -406,7 +329,7 @@ export default function CreateListing() {
               type='button'
               disabled={uploading}
               onClick={handleImageSubmit}
-              className='p-3 text-blue-400 border border-blue-400 rounded uppercase hover:shadow-lg disabled:opacity-80'
+              className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'
             >
               {uploading ? 'Uploading...' : 'Upload'}
             </button>
@@ -436,23 +359,13 @@ export default function CreateListing() {
             ))}
           <button
             disabled={loading || uploading}
-            className='p-3 bg-blue-800 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+            className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
           >
             {loading ? 'Creating...' : 'Create listing'}
           </button>
           {error && <p className='text-red-700 text-sm'>{error}</p>}
-          {location && (
-            <MapContainer center={location} zoom={8} style={{ height: '400px' }} whenCreated={setMap} ref={mapRef}>
-              <Events />
-              <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-              <Marker position={location} icon={defaultIcon}>
-                <Popup>Your selected location</Popup>
-              </Marker>
-            </MapContainer>
-          )}
         </div>
       </form>
-      <div className='map-container mt-6'></div>
     </main>
   );
 }
