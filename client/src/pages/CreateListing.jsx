@@ -47,13 +47,28 @@ export default function CreateListing() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [location, setLocation] = useState({ lat: 20.5937, lng: 78.9629 }); // Default to India
+  const [location, setLocation] = useState(null); // Initially null to handle loading state
   const [map, setMap] = useState(null);
   const mapRef = useRef();
 
+  // Get user's current location
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setLocation({ lat: latitude, lng: longitude });
+      },
+      (error) => {
+        console.error('Error getting location:', error);
+        // Set a default location if user denies location access
+        setLocation({ lat: 20.5937, lng: 78.9629 }); // Default to India
+      }
+    );
+  }, []);
+
   // Update map view when location changes
   useEffect(() => {
-    if (map) {
+    if (map && location) {
       map.setView(location, 8); // Set zoom level as needed
     }
   }, [location, map]);
@@ -86,7 +101,7 @@ export default function CreateListing() {
 
   // Component for handling map events
   const Events = () => {
-    const map = useMapEvents({
+    useMapEvents({
       click: handleMapClick,
     });
     return null;
@@ -426,18 +441,18 @@ export default function CreateListing() {
             {loading ? 'Creating...' : 'Create listing'}
           </button>
           {error && <p className='text-red-700 text-sm'>{error}</p>}
-          <MapContainer center={location} zoom={8} style={{ height: '400px' }} whenCreated={setMap} ref={mapRef}>
-          <Events />
-          <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-          <Marker position={location} icon={defaultIcon}>
-            <Popup>Your selected location</Popup>
-          </Marker>
-        </MapContainer>
+          {location && (
+            <MapContainer center={location} zoom={8} style={{ height: '400px' }} whenCreated={setMap} ref={mapRef}>
+              <Events />
+              <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+              <Marker position={location} icon={defaultIcon}>
+                <Popup>Your selected location</Popup>
+              </Marker>
+            </MapContainer>
+          )}
         </div>
       </form>
-      <div className='map-container mt-6'>
-        
-      </div>
+      <div className='map-container mt-6'></div>
     </main>
   );
 }
