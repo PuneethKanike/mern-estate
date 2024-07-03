@@ -4,6 +4,7 @@ import About from './pages/About';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
+import UpdateListing from './pages/UpdateListing';
 import Header from './components/Header';
 import PrivacyRouter from './components/PrivacyRouter';
 import { useState, useEffect } from 'react';
@@ -32,6 +33,8 @@ function App() {
         <Route element={<PrivacyRouter />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/createlisting" element={<CreateListing />} />
+          <Route path="/updatelisting/:listingId" element={<UpdateListing />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
