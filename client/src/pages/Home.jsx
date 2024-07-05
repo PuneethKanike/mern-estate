@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
@@ -10,8 +10,8 @@ export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
-  SwiperCore.use([Navigation]);
-  console.log(offerListings);
+  SwiperCore.use([Navigation, Autoplay]);
+
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
@@ -23,6 +23,7 @@ export default function Home() {
         console.log(error);
       }
     };
+
     const fetchRentListings = async () => {
       try {
         const res = await fetch('/api/listing/get?type=rent&limit=4');
@@ -43,8 +44,10 @@ export default function Home() {
         console.log(error);
       }
     };
+
     fetchOfferListings();
   }, []);
+
   return (
     <div>
       {/* top */}
@@ -55,8 +58,7 @@ export default function Home() {
           place with ease
         </h1>
         <div className='text-gray-400 text-xs sm:text-sm'>
-          Sahand Estate is the best place to find your next perfect place to
-          live.
+          LiveLink is the best place to find your next perfect place to live.
           <br />
           We have a wide range of properties for you to choose from.
         </div>
@@ -69,30 +71,35 @@ export default function Home() {
       </div>
 
       {/* swiper */}
-      <Swiper navigation>
-  {offerListings &&
-    offerListings.length > 0 &&
-    offerListings.map((listing) => (
-      <SwiperSlide key={listing._id}>
-        <div
-          style={{
-            background: `url(${listing.imageUrls[0]}) center no-repeat`,
-            backgroundSize: 'cover',
-          }}
-          className='h-[500px]'
-        ></div>
-      </SwiperSlide>
-    ))}
-</Swiper>
+      <Swiper
+        navigation
+        loop
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+      >
+        {offerListings &&
+          offerListings.length > 0 &&
+          offerListings.map((listing) => (
+            <SwiperSlide key={listing._id}>
+              <div
+                style={{
+                  background: `url(${listing.imageUrls[0]}) center no-repeat`,
+                  backgroundSize: 'cover',
+                }}
+                className='h-[500px]'
+              ></div>
+            </SwiperSlide>
+          ))}
+      </Swiper>
 
-      {/* listing results for offer, sale and rent */}
-
+      {/* listing results for offer, sale, and rent */}
       <div className='max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10'>
         {offerListings && offerListings.length > 0 && (
-          <div className=''>
+          <div>
             <div className='my-3'>
               <h2 className='text-2xl font-semibold text-slate-600 dark:text-slate-400'>Recent offers</h2>
-              <Link className='text-sm text-blue-800 dark:text-blue-400 hover:underline' to={'/search?offer=true'}>Show more offers</Link>
+              <Link className='text-sm text-blue-800 dark:text-blue-400 hover:underline' to={'/search?offer=true'}>
+                Show more offers
+              </Link>
             </div>
             <div className='flex flex-wrap gap-4'>
               {offerListings.map((listing) => (
@@ -102,10 +109,12 @@ export default function Home() {
           </div>
         )}
         {rentListings && rentListings.length > 0 && (
-          <div className=''>
+          <div>
             <div className='my-3'>
               <h2 className='text-2xl font-semibold text-slate-600 dark:text-slate-400'>Recent places for rent</h2>
-              <Link className='text-sm text-blue-800 dark:text-blue-400 hover:underline' to={'/search?type=rent'}>Show more places for rent</Link>
+              <Link className='text-sm text-blue-800 dark:text-blue-400 hover:underline' to={'/search?type=rent'}>
+                Show more places for rent
+              </Link>
             </div>
             <div className='flex flex-wrap gap-4'>
               {rentListings.map((listing) => (
@@ -115,10 +124,12 @@ export default function Home() {
           </div>
         )}
         {saleListings && saleListings.length > 0 && (
-          <div className=''>
+          <div>
             <div className='my-3'>
               <h2 className='text-2xl font-semibold text-slate-600 dark:text-slate-400'>Recent places for sale</h2>
-              <Link className='text-sm text-blue-800 hover:underline dark:text-blue-400' to={'/search?type=sale'}>Show more places for sale</Link>
+              <Link className='text-sm text-blue-800 hover:underline dark:text-blue-400' to={'/search?type=sale'}>
+                Show more places for sale
+              </Link>
             </div>
             <div className='flex flex-wrap gap-4'>
               {saleListings.map((listing) => (
