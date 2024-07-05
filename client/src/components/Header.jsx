@@ -35,15 +35,18 @@ function Header({ theme, toggleTheme }) {
           </h1>
         </Link>
 
-        <form onSubmit={handleSubmit} className="dark:bg-slate-900 rounded-lg flex items-center pr-3">
+        <form onSubmit={handleSubmit} 
+        className="dark:bg-slate-900 rounded-lg flex items-center pr-3">
           <input
+            value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             placeholder="Location or Title . . ."
             className="bg-transparent p-3 rounded-lg dark:bg-slate-900 focus:outline-none w-24 sm:w-64 text-black dark:text-white border-none"
           />
-          
-              <FaSearch className='text-slate-500 dark:text-white' />
+          <button>
+            <FaSearch className='text-slate-600' />
+          </button>
          
         </form>
 

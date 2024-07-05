@@ -90,10 +90,10 @@ export default function Listing() {
           <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
             <p className='text-2xl font-semibold'>
               {listing.name} - <span className='text-green-800 dark:text-green-400'>₹{' '}
-              {listing.offer
-                ? listing.discountPrice.toLocaleString('en-US')
-                : listing.regularPrice.toLocaleString('en-US')}
-              {listing.type === 'rent' && ' / month'}
+               {listing.offer
+    ? listing.discountPrice.toLocaleString('en-IN', { style: 'currency', currency: 'INR' }).replace(/₹\s?/, '')
+    : listing.regularPrice.toLocaleString('en-IN', { style: 'currency', currency: 'INR' }).replace(/₹\s?/, '')}
+  {listing.type === 'rent' && ' / month'}
               </span>
             </p>
             <p className='flex items-center mt-6 gap-2 text-slate-600 dark:text-white text-sm'>
