@@ -94,6 +94,8 @@ export default function Profile() {
   };
 
   const handleDeleteUser = async () => {
+    if (window.confirm("This action will delete your Account?"))
+    if (window.confirm("Are you sure 💀?"))
     try {
       dispatch(deleteUserStart());
       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
@@ -143,21 +145,25 @@ export default function Profile() {
 
 
   const handleListingDelete = async (listingId) => {
-    try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: 'DELETE',
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        console.log(data.message);
-        return;
-      }
+    if (window.confirm("Are you sure you want to delete this listing?")) {
+      try {
+        const res = await fetch(`/api/listing/delete/${listingId}`, {
+          method: 'DELETE',
+        });
+        const data = await res.json();
+        if (data.success === false) {
+          console.log(data.message);
+          return;
+        }
 
-      setUserListings((prev) =>
-        prev.filter((listing) => listing._id !== listingId)
-      );
-    } catch (error) {
-      console.log(error.message);
+        setUserListings((prev) =>
+          prev.filter((listing) => listing._id !== listingId)
+        );
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else {
+      console.log("Delete action cancelled.");
     }
   };
 
