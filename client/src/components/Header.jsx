@@ -1,10 +1,29 @@
 import { FaSearch, FaSun, FaMoon } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
 function Header({ theme, toggleTheme }) {
+  
   const { currentUser } = useSelector((state) => state.user);
+   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
 
   return (
     <header className={`bg-white dark:bg-darkblue ${theme === 'dark' ? 'dark' : ''} fixed top-0 left-0 w-full z-50`}>
@@ -16,13 +35,16 @@ function Header({ theme, toggleTheme }) {
           </h1>
         </Link>
 
-        <form className="dark:bg-slate-900 rounded-lg flex items-center pr-3">
+        <form onSubmit={handleSubmit} className="dark:bg-slate-900 rounded-lg flex items-center pr-3">
           <input
+            onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             placeholder="Location or Title . . ."
             className="bg-transparent p-3 rounded-lg dark:bg-slate-900 focus:outline-none w-24 sm:w-64 text-black dark:text-white border-none"
           />
-          <FaSearch className='text-slate-500 dark:text-white' />
+          
+              <FaSearch className='text-slate-500 dark:text-white' />
+         
         </form>
 
         <ul className='flex gap-4'>
