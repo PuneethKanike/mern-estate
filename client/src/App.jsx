@@ -10,6 +10,7 @@ import PrivacyRouter from './components/PrivacyRouter';
 import { useState, useEffect } from 'react';
 import CreateListing from './pages/CreateListing';
 import Listing from './pages/Listing';
+import Search from './pages/Search';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -32,6 +33,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path='/listing/:listingId' element={<Listing />} />
+        <Route path='/search' element={<Search />} />
         <Route element={<PrivacyRouter />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/createlisting" element={<CreateListing />} />
