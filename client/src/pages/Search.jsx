@@ -139,8 +139,8 @@ export default function Search() {
     };
 
     return (
-        <div className='flex flex-col md:flex-row pt-12 '>
-            <div className='p-7 dark:border-slate-500 md:border-r-2 md:min-h-screen'>
+        <div className='flex flex-col md:flex-row pt-20'>
+            <div className='p-7  md:min-h-screen'>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
                     <div className='flex items-center gap-2'>
                         <label className='whitespace-nowrap font-semibold'>Search Term:</label>
@@ -150,7 +150,7 @@ export default function Search() {
                             placeholder='Location or Title'
                             value={sidebardata.searchTerm}
                             onChange={handleChange}
-                            className='border rounded-lg p-3 w-full dark:bg-darkblue dark:hover:bg-slate-800'
+                            className=' border dark:border-none focus:outline-none rounded-lg p-3 w-full dark:bg-slate-900 dark:hover:bg-slate-800 '
                         />
                     </div>
                     <div className='flex items-center gap-2'>
@@ -161,7 +161,7 @@ export default function Search() {
                             placeholder='Number of beds'
                             value={sidebardata.beds}
                             onChange={handleChange}
-                            className='border rounded-lg p-3 w-full dark:bg-darkblue dark:hover:bg-slate-800'
+                            className='border dark:border-none focus:outline-none rounded-lg p-3 w-full dark:bg-slate-900 dark:hover:bg-slate-800'
                         />
                     </div>
                     <div className='flex items-center gap-2'>
@@ -172,7 +172,7 @@ export default function Search() {
                             placeholder='Number of baths'
                             value={sidebardata.baths}
                             onChange={handleChange}
-                            className='border rounded-lg p-3 w-full dark:bg-darkblue dark:hover:bg-slate-800'
+                            className='border dark:border-none focus:outline-none rounded-lg p-3 w-full dark:bg-slate-900 dark:hover:bg-slate-800'
                         />
                     </div>
                     <div className='flex gap-2 flex-wrap items-center'>
@@ -225,7 +225,7 @@ export default function Search() {
                     </div>
                     <div className='flex items-center gap-2'>
                         <label className='font-semibold'>Sort:</label>
-                        <select id='sort_order' className='border rounded-lg p-3 dark:bg-darkblue dark:hover:bg-slate-800'
+                        <select id='sort_order' className='border dark:border-none focus:outline-none rounded-lg p-3 dark:bg-slate-900 dark:hover:bg-slate-800'
                             onChange={handleChange}
                             defaultValue={'created_at_desc'}
                         >

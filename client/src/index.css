@@ -3,13 +3,15 @@
 @tailwind utilities;
 
 body {
-  background-color: rgb(241, 245, 241);
+  background-color: rgb(255, 255, 255);
 }
 
 body.dark {
   background-color: #05001c;
   color: #e0e0e0;
 }
+
+
 
 
 

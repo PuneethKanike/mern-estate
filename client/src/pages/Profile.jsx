@@ -186,11 +186,11 @@ export default function Profile() {
             ''
           )}
         </p>
-        <input onChange={handleChange} defaultValue={currentUser.username} type="text" placeholder="username" id="username" className="border p-3 rounded-lg bg-gray-200 dark:bg-darkblue text-black dark:text-white " />
-        <input onChange={handleChange} defaultValue={currentUser.email} type="email" placeholder="email" id="email" className="border p-3 rounded-lg bg-gray-200 dark:bg-darkblue text-black dark:text-white" />
-        <input onChange={handleChange} type="password" placeholder="password" id="password" className="border p-3 rounded-lg bg-gray-200 dark:bg-darkblue text-black dark:text-white" />
-        <button disabled={loading} className="text-white dark:text-blue-400 border dark:border-blue-400 bg-blue-900 dark:hover:bg-blue-950 dark:hover:text-blue-200 dark:bg-darkblue rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-70">{loading ? 'Loading...' : 'Update'}</button>
-        <Link className='bg-green-900 text-white p-3 rounded-lg uppercase text-center hover:opacity-95' to = {"/createlisting"}>
+        <input onChange={handleChange} defaultValue={currentUser.username} type="text" placeholder="username" id="username" className="focus:outline-none p-3 rounded-lg bg-gray-200 dark:bg-slate-900 text-black dark:text-white " />
+        <input onChange={handleChange} defaultValue={currentUser.email} type="email" placeholder="email" id="email" className="focus:outline-none p-3 rounded-lg bg-gray-200 dark:bg-slate-900 text-black dark:text-white" />
+        <input onChange={handleChange} type="password" placeholder="password" id="password" className="focus:outline-none p-3 rounded-lg bg-gray-200 dark:bg-slate-900 text-black dark:text-white" />
+        <button disabled={loading} className="text-white dark:text-blue-400   bg-blue-900 dark:hover:bg-blue-900  dark:bg-blue-950 rounded-lg p-3 uppercase hover:opacity-95 disabled:placeholder-opacity-70">{loading ? 'Loading...' : 'Update'}</button>
+        <Link className='bg-green-950 hover:bg-green-900 dark:text-green-400 text-white p-3 rounded-lg uppercase text-center hover:opacity-95' to = {"/createlisting"}>
         Create Listing
         </Link>
       </form>
@@ -201,7 +201,7 @@ export default function Profile() {
       </div>
       <p className="text-red-700 dark:text-red-400 mt-5">{error ? error : ''}</p>
       <p className="text-green-700 dark:text-green-400 mt-5">{updateSuccess ? 'User update done' : ''}</p>
-      <button onClick={handleShowListings} className='text-green-900 w-full'>Show listings</button>
+      <button onClick={handleShowListings} className='text-green-700 dark:text-green-400 w-full'>Show listings</button>
       <p className='text-red-600 mt-5'>{showListingsError ? 'Error showing listing' : ''}</p>
       {userListings &&
         userListings.length > 0 &&
@@ -210,7 +210,7 @@ export default function Profile() {
           {userListings.map((listing) => (
             <div
               key={listing._id}
-              className='border rounded-lg p-3 flex justify-between items-center gap-4 dark:hover:bg-slate-900'
+              className='border dark:border-slate-600 rounded-lg p-3 flex justify-between items-center gap-4 dark:hover:bg-slate-900'
             >
               <Link to={`/listing/${listing._id}`}>
                 <img
@@ -229,7 +229,7 @@ export default function Profile() {
               <div className='flex flex-col item-center'>
                 <button  onClick={() => handleListingDelete(listing._id)} className='text-red-500 uppercase'>Delete</button>
                 <Link to={`/updatelisting/${listing._id}`}>
-                  <button className='text-green-700 uppercase'>Edit</button>
+                  <button className='dark:text-green-500 text-green-700 uppercase'>Edit</button>
                 </Link>
               </div>
             </div>
