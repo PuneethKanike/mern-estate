@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function ListingItem({ listing }) {
   return (
-    <div className='bg-white dark:bg-slate-900  shadow-md hover:shadow-lg dark:hover:shadow-sm  dark:hover:shadow-slate-500 transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]'>
+    <div className='bg-white dark:bg-slate-900 shadow-md hover:shadow-lg dark:hover:shadow-sm dark:hover:shadow-slate-500 transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]'>
       <Link to={`/listing/${listing._id}`}>
         <img
           src={
@@ -27,12 +27,18 @@ export default function ListingItem({ listing }) {
           <p className='text-sm text-gray-600 line-clamp-2 dark:text-slate-300'>
             {listing.description}
           </p>
-          <p className='text-slate-500 mt-2 font-semibold dark:text-green-300 '>
-             ₹
-             {listing.offer
-    ? listing.discountPrice.toLocaleString('en-IN', { style: 'currency', currency: 'INR' }).replace(/₹\s?/, '')
-    : listing.regularPrice.toLocaleString('en-IN', { style: 'currency', currency: 'INR' }).replace(/₹\s?/, '')}
-  {listing.type === 'rent' && ' / month'}
+          <p className='text-slate-500 mt-2 font-semibold dark:text-green-300'>
+            ₹
+            {listing.offer
+              ? listing.discountPrice.toLocaleString('en-IN', {
+                  style: 'currency',
+                  currency: 'INR',
+                }).replace(/₹\s?/, '')
+              : listing.regularPrice.toLocaleString('en-IN', {
+                  style: 'currency',
+                  currency: 'INR',
+                }).replace(/₹\s?/, '')}
+            {listing.type === 'rent' && ' / month'}
           </p>
           <div className='text-slate-700 flex gap-4'>
             <div className='font-bold text-xs dark:text-slate-300'>
@@ -46,6 +52,10 @@ export default function ListingItem({ listing }) {
                 : `${listing.bathrooms} bath `}
             </div>
           </div>
+         
+          <p className={`w-full max-w-[200px] text-center p-1 rounded-md ${listing.available ? 'bg-green-900 text-white' : 'bg-red-900 text-white'}`}>
+            {listing.available ? 'Available' : 'Not Available'}
+          </p>
         </div>
       </Link>
     </div>
@@ -65,5 +75,6 @@ ListingItem.propTypes = {
     type: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     bathrooms: PropTypes.number.isRequired,
+    available: PropTypes.bool.isRequired, 
   }).isRequired,
 };

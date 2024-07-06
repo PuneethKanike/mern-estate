@@ -5,10 +5,10 @@ import image3 from '../images/image3.png';
 import image4 from '../images/image4.png';
 import image5 from '../images/image5.png';
 import image6 from '../images/image6.png';
-import '../css/About.css';
+import '../css/CardZoom.css';
 function About() {
     return (
-        <div className='py-20 px-4 max-w-6xl mx-auto z-0'>
+        <div className='py-28 px-4 max-w-6xl mx-auto z-0'>
             <h1 className='text-3xl font-bold mb-4 text-slate-800 dark:text-blue-300'>About LiveLink</h1>
             <p className='mb-4 text-slate-700 dark:text-white'>
                 Welcome to LiveLink, your premier destination for seamless consumer-to-consumer real estate transactions. Our mission is to simplify the process of buying, renting, and listing properties by providing an intuitive, secure, and comprehensive platform.

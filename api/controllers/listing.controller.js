@@ -92,7 +92,9 @@ export const getListings = async (req, res, next) => {
             type = { $in: ['sale', 'rent'] };
         }
 
-        const searchTerm = req.query.searchTerm || '';
+        let searchTerm = req.query.searchTerm || '';
+        searchTerm = searchTerm.replace(/\s/g, '\\s*'); // Replace white spaces with \s*
+
         const beds = req.query.beds ? parseInt(req.query.beds) : undefined;
         const baths = req.query.baths ? parseInt(req.query.baths) : undefined;
 

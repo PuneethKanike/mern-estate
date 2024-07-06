@@ -19,8 +19,6 @@ export default function Search() {
     const [loading, setLoading] = useState(false);
     const [listings, setListings] = useState([]);
     const [showMore, setShowMore] = useState(false);
-    console.log(listings)
-    console.log(loading)
 
     useEffect(()=> {
         const urlParams = new URLSearchParams(location.search);
@@ -125,7 +123,6 @@ export default function Search() {
 
     const onShowMoreClick = async () => {
         const numberOfListings = listings.length;
-        console.log(numberOfListings)
         const startIndex = numberOfListings;
         const urlParams = new URLSearchParams(location.search);
         urlParams.set('startIndex', startIndex);
@@ -140,7 +137,7 @@ export default function Search() {
 
     return (
         <div className='flex flex-col md:flex-row pt-20'>
-            <div className='p-7  md:min-h-screen'>
+            <div className='p-7 pl-10 md:min-h-screen fixed top-20 left-0 dark:bg-darkblue'>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
                     <div className='flex items-center gap-2'>
                         <label className='whitespace-nowrap font-semibold'>Search Term:</label>
@@ -150,7 +147,7 @@ export default function Search() {
                             placeholder='Location or Title'
                             value={sidebardata.searchTerm}
                             onChange={handleChange}
-                            className=' border dark:border-none focus:outline-none rounded-lg p-3 w-full dark:bg-slate-900 dark:hover:bg-slate-800 '
+                            className='border dark:border-none focus:outline-none rounded-lg p-3 w-full dark:bg-slate-900 dark:hover:bg-slate-800'
                         />
                     </div>
                     <div className='flex items-center gap-2'>
@@ -239,12 +236,12 @@ export default function Search() {
                         Search
                     </button>
                 </form>
-            </div> 
-            <div className='flex-1'>
+            </div>
+            <div className='flex-1 p-7 ml-0 md:ml-96 pl-16'>
                 <h1 className='text-3xl font-semibold p-3 text-slate-700 mt-5 dark:text-slate-400'>Listing results:</h1>
-                <div className='p-7 flex flex-wrap gap-4'>
+                <div className='flex flex-wrap gap-4'>
                     {!loading && listings.length === 0 && (
-                        <p className='text-xl text-slate-700'>No listing found!</p>
+                        <p className='text-xl text-slate-700'>No listings found!</p>
                     )}
                     {loading && (
                         <p className='text-xl text-slate-700 text-center w-full'>

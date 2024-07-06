@@ -9,6 +9,7 @@ import { app } from '../firebase';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
+
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ export default function CreateListing() {
     offer: false,
     parking: false,
     furnished: false,
+    available: false, // Added available field
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -119,7 +121,8 @@ export default function CreateListing() {
     if (
       e.target.id === 'parking' ||
       e.target.id === 'furnished' ||
-      e.target.id === 'offer'
+      e.target.id === 'offer' ||
+      e.target.id === 'available' // Handle available checkbox change
     ) {
       setFormData({
         ...formData,
@@ -170,7 +173,7 @@ export default function CreateListing() {
     }
   };
   return (
-    <main className='p-3 pt-14 pt max-w-4xl mx-auto'>
+    <main className='p-3 pt-32 pt max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
         Update a Listing
       </h1>
@@ -179,7 +182,7 @@ export default function CreateListing() {
           <input
             type='text'
             placeholder='Name'
-            className='border p-3 rounded-lg dark:bg-darkblue'
+            className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='name'
             maxLength='62'
             minLength='10'
@@ -190,7 +193,7 @@ export default function CreateListing() {
           <textarea
             type='text'
             placeholder='Description'
-            className='border p-3 rounded-lg dark:bg-darkblue'
+            className=' p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='description'
             required
             onChange={handleChange}
@@ -199,7 +202,7 @@ export default function CreateListing() {
           <input
             type='text'
             placeholder='Address'
-            className='border p-3 rounded-lg dark:bg-darkblue'
+            className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='address'
             required
             onChange={handleChange}
@@ -256,6 +259,16 @@ export default function CreateListing() {
               />
               <span>Offer</span>
             </div>
+            <div className='flex gap-2'> {/* Added available checkbox */}
+              <input
+                type='checkbox'
+                id='available'
+                className='w-5'
+                onChange={handleChange}
+                checked={formData.available}
+              />
+              <span>Available</span>
+            </div>
           </div>
           <div className='flex flex-wrap gap-6'>
             <div className='flex items-center gap-2'>
@@ -265,7 +278,7 @@ export default function CreateListing() {
                 min='1'
                 max='10'
                 required
-                className='p-3 border border-gray-300 rounded-lg dark:bg-darkblue'
+                className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                 onChange={handleChange}
                 value={formData.bedrooms}
               />
@@ -278,7 +291,7 @@ export default function CreateListing() {
                 min='1'
                 max='10'
                 required
-                className='p-3 border border-gray-300 rounded-lg dark:bg-darkblue'
+                className='p-3 border-gray-300 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                 onChange={handleChange}
                 value={formData.bathrooms}
               />
@@ -291,7 +304,7 @@ export default function CreateListing() {
                 min='50'
                 max='10000000'
                 required
-                className='p-3 border border-gray-300 rounded-lg dark:bg-darkblue'
+                className='p-3 border-gray-300 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                 onChange={handleChange}
                 value={formData.regularPrice}
               />
@@ -310,7 +323,7 @@ export default function CreateListing() {
                   min='0'
                   max='10000000'
                   required
-                  className='p-3 border border-gray-300 rounded-lg dark:bg-darkblue'
+                  className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                   onChange={handleChange}
                   value={formData.discountPrice}
                 />
@@ -334,7 +347,7 @@ export default function CreateListing() {
           <div className='flex gap-4'>
             <input
               onChange={(e) => setFiles(e.target.files)}
-              className='p-3 border border-gray-300 rounded w-full'
+              className='p-3 rounded w-full dark:bg-darkblue '
               type='file'
               id='images'
               accept='image/*'
@@ -356,12 +369,12 @@ export default function CreateListing() {
             formData.imageUrls.map((url, index) => (
               <div
                 key={url}
-                className='flex justify-between p-3 border items-center'
+                className='card flex justify-between p-3 dark:bg-slate-900 rounded-2xl items-center bg-slate-200'
               >
                 <img
                   src={url}
                   alt='listing image'
-                  className='w-20 h-20 object-contain rounded-lg'
+                  className='w-20 h-30 object-contain rounded-lg'
                 />
                 <button
                   type='button'

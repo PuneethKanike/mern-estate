@@ -26,12 +26,14 @@ export default function CreateListing() {
     offer: false,
     parking: false,
     furnished: false,
+    available: true, 
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   console.log(formData);
+
   const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
@@ -103,7 +105,8 @@ export default function CreateListing() {
     if (
       e.target.id === 'parking' ||
       e.target.id === 'furnished' ||
-      e.target.id === 'offer'
+      e.target.id === 'offer' ||
+      e.target.id === 'available'
     ) {
       setFormData({
         ...formData,
@@ -154,7 +157,7 @@ export default function CreateListing() {
     }
   };
   return (
-    <main className='p-3 pt-14 max-w-4xl mx-auto'>
+    <main className='p-3 pt-32 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
         Create a Listing
       </h1>
@@ -163,7 +166,7 @@ export default function CreateListing() {
           <input
             type='text'
             placeholder='Name'
-            className='border p-3 rounded-lg dark:bg-darkblue'
+            className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='name'
             maxLength='62'
             minLength='10'
@@ -174,7 +177,7 @@ export default function CreateListing() {
           <textarea
             type='text'
             placeholder='Description'
-            className='border p-3 rounded-lg dark:bg-darkblue'
+            className='p-3 rounded-lg  dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='description'
             required
             onChange={handleChange}
@@ -183,7 +186,7 @@ export default function CreateListing() {
           <input
             type='text'
             placeholder='Address'
-            className='border p-3 rounded-lg dark:bg-darkblue'
+            className='p-3 rounded-lg  dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='address'
             required
             onChange={handleChange}
@@ -240,6 +243,16 @@ export default function CreateListing() {
               />
               <span>Offer</span>
             </div>
+            <div className='flex gap-2'>
+              <input
+                type='checkbox'
+                id='available'
+                className='w-5'
+                onChange={handleChange}
+                checked={formData.available}
+              />
+              <span>Available</span>
+            </div>
           </div>
           <div className='flex flex-wrap gap-6'>
             <div className='flex items-center gap-2'>
@@ -249,7 +262,7 @@ export default function CreateListing() {
                 min='1'
                 max='10'
                 required
-                className='p-3 border border-gray-300 rounded-lg dark:bg-darkblue'
+                className='p-3 border-gray-300 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                 onChange={handleChange}
                 value={formData.bedrooms}
               />
@@ -262,7 +275,7 @@ export default function CreateListing() {
                 min='1'
                 max='10'
                 required
-                className='p-3 border border-gray-300 rounded-lg dark:bg-darkblue'
+                className='p-3  border-gray-300 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                 onChange={handleChange}
                 value={formData.bathrooms}
               />
@@ -282,7 +295,7 @@ export default function CreateListing() {
               <div className='flex flex-col items-center'>
                 <p>Regular price</p>
                 {formData.type === 'rent' && (
-                  <span className='text-xs'>($ / month)</span>
+                  <span className='text-xs'>(₹ / month)</span>
                 )}
               </div>
             </div>
@@ -302,7 +315,7 @@ export default function CreateListing() {
                   <p>Discounted price</p>
 
                   {formData.type === 'rent' && (
-                    <span className='text-xs'>($ / month)</span>
+                    <span className='text-xs'>(₹ / month)</span>
                   )}
                 </div>
               </div>
@@ -341,12 +354,12 @@ export default function CreateListing() {
             formData.imageUrls.map((url, index) => (
               <div
                 key={url}
-                className='flex justify-between p-3 border items-center'
+                className='flex justify-between p-3 border items-center dark:bg-slate-900 rounded-2xl'
               >
                 <img
                   src={url}
                   alt='listing image'
-                  className='w-20 h-20 object-contain rounded-lg'
+                  className='w-20 h-30 object-contain rounded-lg'
                 />
                 <button
                   type='button'

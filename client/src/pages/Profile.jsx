@@ -21,6 +21,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+
 export default function Profile() {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -210,7 +211,7 @@ export default function Profile() {
           {userListings.map((listing) => (
             <div
               key={listing._id}
-              className='border dark:border-slate-600 rounded-lg p-3 flex justify-between items-center gap-4 dark:hover:bg-slate-900'
+              className='card border dark:border-slate-600 rounded-lg p-3 flex justify-between items-center gap-4 dark:hover:bg-slate-900'
             >
               <Link to={`/listing/${listing._id}`}>
                 <img
