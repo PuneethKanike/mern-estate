@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import ListingItem from "../components/ListingItem";
+ // Path to your translation file
 
 export default function Search() {
+    const { t } = useTranslation(); // Hook to access translations
     const navigate = useNavigate();
     const [sidebardata, setSidebardata] = useState({
         searchTerm: '',
@@ -137,115 +140,116 @@ export default function Search() {
 
     return (
         <div className='flex flex-col md:flex-row pt-20'>
-            <div className='p-7 pl-10 md:min-h-screen fixed top-20 left-0 dark:bg-darkblue'>
+            <div className='p-7 md:min-h-screen'>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
                     <div className='flex items-center gap-2'>
-                        <label className='whitespace-nowrap font-semibold'>Search Term:</label>
+                        <label className='whitespace-nowrap font-semibold'>{t('searchTerm')}</label>
                         <input
                             type='text'
                             id='searchTerm'
-                            placeholder='Location or Title'
+                            placeholder={t('search_term_placeholder')}
                             value={sidebardata.searchTerm}
                             onChange={handleChange}
                             className='border dark:border-none focus:outline-none rounded-lg p-3 w-full dark:bg-slate-900 dark:hover:bg-slate-800'
                         />
                     </div>
                     <div className='flex items-center gap-2'>
-                        <label className='whitespace-nowrap font-semibold'>Beds:</label>
+                        <label className='whitespace-nowrap font-semibold'>{t('beds')}</label>
                         <input
                             type='number'
                             id='beds'
-                            placeholder='Number of beds'
+                            placeholder={t('beds_placeholder')}
                             value={sidebardata.beds}
                             onChange={handleChange}
                             className='border dark:border-none focus:outline-none rounded-lg p-3 w-full dark:bg-slate-900 dark:hover:bg-slate-800'
                         />
                     </div>
                     <div className='flex items-center gap-2'>
-                        <label className='whitespace-nowrap font-semibold'>Baths:</label>
+                        <label className='whitespace-nowrap font-semibold'>{t('baths')}</label>
                         <input
                             type='number'
                             id='baths'
-                            placeholder='Number of baths'
+                            placeholder={t('baths_placeholder')}
                             value={sidebardata.baths}
                             onChange={handleChange}
                             className='border dark:border-none focus:outline-none rounded-lg p-3 w-full dark:bg-slate-900 dark:hover:bg-slate-800'
                         />
                     </div>
                     <div className='flex gap-2 flex-wrap items-center'>
-                        <label className='font-semibold'>Type:</label>
+                        <label className='font-semibold'>{t('type')}</label>
                         <div className='flex gap-2'>
                             <input type='checkbox' id='all' className='w-5'
                                 onChange={handleChange}
                                 checked={sidebardata.type === 'all'}
                             />
-                            <span>Rent & Sale</span>
+                            <span>{t('type_all')}</span>
                         </div>
                         <div className='flex gap-2'>
                             <input type='checkbox' id='rent' className='w-5'
                                 onChange={handleChange}
                                 checked={sidebardata.type === 'rent'}
                             />
-                            <span>Rent</span>
+                            <span>{t('type_rent')}</span>
                         </div>
                         <div className='flex gap-2'>
                             <input type='checkbox' id='sale' className='w-5'
                                 onChange={handleChange}
                                 checked={sidebardata.type === 'sale'}              
                             />
-                            <span>Sale</span>
+                            <span>{t('type_sale')}</span>
                         </div>
                         <div className='flex gap-2'>
                             <input type='checkbox' id='offer' className='w-5' 
                                 onChange={handleChange}
                                 checked={sidebardata.offer}
                             />
-                            <span>Offer</span>
+                            <span>{t('offer')}</span>
                         </div>
                     </div>
                     <div className='flex gap-2 flex-wrap items-center'>
-                        <label className='font-semibold'>Amenities:</label>
+                        <label className='font-semibold'>{t('amenities')}</label>
                         <div className='flex gap-2'>
                             <input type='checkbox' id='parking' className='w-5'
                                 onChange={handleChange}
                                 checked={sidebardata.parking}
                             />
-                            <span>Parking</span>
+                            <span>{t('parking')}</span>
                         </div>
                         <div className='flex gap-2'>
                             <input type='checkbox' id='furnished' className='w-5' 
                                 onChange={handleChange}
                                 checked={sidebardata.furnished}
                             />
-                            <span>Furnished</span>
+                            <span>{t('furnished')}</span>
                         </div>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <label className='font-semibold'>Sort:</label>
+                        <label className='font-semibold'>{t('sort')}</label>
                         <select id='sort_order' className='border dark:border-none focus:outline-none rounded-lg p-3 dark:bg-slate-900 dark:hover:bg-slate-800'
                             onChange={handleChange}
                             defaultValue={'created_at_desc'}
                         >
-                            <option value='regularPrice_desc'>Price high to low</option>
-                            <option value='regularPrice_asc'>Price low to hight</option>
-                            <option value='createdAt_desc'>Latest</option>
-                            <option value='createdAt_asc'>Oldest</option>
+                            <option value='regularPrice_desc'>{t('price_high_to_low')}</option>
+                            <option value='regularPrice_asc'>{t('price_low_to_high')}</option>
+
+                            <option value='createdAt_desc'>{t('latest')}</option>
+                            <option value='createdAt_asc'>{t('oldest')}</option>
                         </select>
                     </div>
                     <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
-                        Search
+                        {t('search_button')}
                     </button>
                 </form>
             </div>
-            <div className='flex-1 p-7 ml-0 md:ml-96 pl-16'>
-                <h1 className='text-3xl font-semibold p-3 text-slate-700 mt-5 dark:text-slate-400'>Listing results:</h1>
-                <div className='flex flex-wrap gap-4'>
+            <div className='flex-1'>
+                <h1 className='text-3xl font-semibold p-3 text-slate-700 mt-5 dark:text-slate-400'>{t('search_title')}</h1>
+                <div className='p-7 flex flex-wrap gap-4'>
                     {!loading && listings.length === 0 && (
-                        <p className='text-xl text-slate-700'>No listings found!</p>
+                        <p className='text-xl text-slate-700'>{t('no_listings_found')}</p>
                     )}
                     {loading && (
                         <p className='text-xl text-slate-700 text-center w-full'>
-                            Loading...
+                            {t('loading_text')}
                         </p>
                     )}
 
@@ -260,7 +264,7 @@ export default function Search() {
                             onClick={onShowMoreClick}
                             className='text-green-700 hover:underline p-7 text-center w-full'
                         >
-                            Show more
+                            {t('show_more_button')}
                         </button>
                     )}
                 </div>

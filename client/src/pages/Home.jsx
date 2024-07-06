@@ -5,11 +5,13 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
+  const { t } = useTranslation();
   SwiperCore.use([Navigation, Autoplay]);
 
   useEffect(() => {
@@ -53,20 +55,18 @@ export default function Home() {
       {/* top */}
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
         <h1 className='text-slate-700 dark:text-slate-400 font-bold text-3xl lg:text-6xl'>
-          Find your next <span className='text-slate-500 dark:text-slate-600'>perfect</span>
+          {t('find_next')} <span className='text-slate-500 dark:text-slate-600'>{t('perfect')}</span>
           <br />
-          place with ease
+          {t('place_with_ease')}
         </h1>
         <div className='text-gray-400 text-xs sm:text-sm'>
-          LiveLink is the best place to find your next perfect place to live.
-          <br />
-          We have a wide range of properties for you to choose from.
+          {t('live_link_desc')}
         </div>
         <Link
           to={'/search'}
           className='text-xs sm:text-sm text-blue-800 dark:text-blue-500 font-bold hover:underline'
         >
-          Let s get started...
+          {t('get_started')}
         </Link>
       </div>
 
@@ -96,9 +96,9 @@ export default function Home() {
         {offerListings && offerListings.length > 0 && (
           <div>
             <div className='my-3'>
-              <h2 className='text-2xl font-semibold text-slate-600 dark:text-slate-400'>Recent offers</h2>
+              <h2 className='text-2xl font-semibold text-slate-600 dark:text-slate-400'>{t('recent_offers')}</h2>
               <Link className='text-sm text-blue-800 dark:text-blue-400 hover:underline' to={'/search?offer=true'}>
-                Show more offers
+                {t('show_more_offers')}
               </Link>
             </div>
             <div className='flex flex-wrap gap-4'>
@@ -111,9 +111,9 @@ export default function Home() {
         {rentListings && rentListings.length > 0 && (
           <div>
             <div className='my-3'>
-              <h2 className='text-2xl font-semibold text-slate-600 dark:text-slate-400'>Recent places for rent</h2>
+              <h2 className='text-2xl font-semibold text-slate-600 dark:text-slate-400'>{t('recent_places_for_rent')}</h2>
               <Link className='text-sm text-blue-800 dark:text-blue-400 hover:underline' to={'/search?type=rent'}>
-                Show more places for rent
+                {t('show_more_places_for_rent')}
               </Link>
             </div>
             <div className='flex flex-wrap gap-4'>
@@ -126,9 +126,9 @@ export default function Home() {
         {saleListings && saleListings.length > 0 && (
           <div>
             <div className='my-3'>
-              <h2 className='text-2xl font-semibold text-slate-600 dark:text-slate-400'>Recent places for sale</h2>
+              <h2 className='text-2xl font-semibold text-slate-600 dark:text-slate-400'>{t('recent_places_for_sale')}</h2>
               <Link className='text-sm text-blue-800 hover:underline dark:text-blue-400' to={'/search?type=sale'}>
-                Show more places for sale
+                {t('show_more_places_for_sale')}
               </Link>
             </div>
             <div className='flex flex-wrap gap-4'>
