@@ -44,7 +44,7 @@ const Admin = () => {
   return (
     <div className="p-3 pt-20 max-w-lg mx-auto bg-">
       <h1 className="text-3xl font-semibold text-center my-7 dark:text-white uppercase text-slate-500">
-        Admin Listings
+        💀
       </h1>
       {error && <p className="text-red-700 dark:text-red-400">{error}</p>}
       {listings.length > 0 ? (
@@ -52,7 +52,7 @@ const Admin = () => {
           {listings.map((listing) => (
             <div
               key={listing._id}
-              className="card border dark:border-slate-600 rounded-lg p-3 flex justify-between items-center gap-4 dark:hover:bg-slate-900"
+              className="  rounded-lg p-3 flex justify-between items-center gap-4 dark:hover:bg-slate-900"
             >
               <Link to={`/listing/${listing._id}`}>
                 <img

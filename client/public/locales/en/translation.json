@@ -1,4 +1,10 @@
-{
+{ 
+  "welcome_message": "Welcome to",
+  "live_link_name_1": "Live",
+  "live_link_name_2": "Link",
+  "redirecting_message": "Redirecting you to the home page...",
+
+
   "welcome": "Welcome",
   "home": "Home",
   "about": "About",

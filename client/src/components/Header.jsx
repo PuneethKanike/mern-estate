@@ -35,7 +35,7 @@ function Header({ theme, toggleTheme }) {
     <Suspense fallback={<div>Loading...</div>}>
       <header className={`bg-white dark:bg-darkblue ${theme === 'dark' ? 'dark' : ''} p-3 fixed top-0 left-0 w-full z-50`}>
         <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
-          <Link to='/'>
+          <Link to='/home'>
             <h1 className="font-bold text-sm sm:text-xl flex flex-wrap text-slate-700 dark:text-white">
               <span className="text-slate-500 dark:text-slate-50">Live</span>
               <span className="text-slate-700 dark:text-slate-500">Link</span>
@@ -57,7 +57,7 @@ function Header({ theme, toggleTheme }) {
           </form>
 
           <ul className='flex gap-4 items-center'>
-            <Link to='/'><li className='hidden sm:inline text-slate-700 hover:underline dark:text-white'>{t('home')}</li></Link>
+            <Link to='/home'><li className='hidden sm:inline text-slate-700 hover:underline dark:text-white'>{t('home')}</li></Link>
             <Link to='/about'><li className='hidden sm:inline text-slate-700 hover:underline dark:text-white'>{t('about')}</li></Link>
             <Link to='/profile'>
               {currentUser ? (
@@ -67,7 +67,7 @@ function Header({ theme, toggleTheme }) {
                   alt='profile'
                 />
               ) : (
-                <li className='text-slate-700 hover:underline dark:text-white'>{t('signIn')}</li>
+                <li className='text-slate-700 hover:underline dark:text-white'>{t('sign_in')}</li>
               )}
             </Link>
             <li>

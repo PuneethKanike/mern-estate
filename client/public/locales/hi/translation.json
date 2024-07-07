@@ -1,8 +1,15 @@
-{
+{ 
+  
+  "welcome_message": "स्वागत है",
+  "live_link_name_1": "लाइव",
+  "live_link_name_2": "लिंक मे",
+  "redirecting_message": "आपको होम पेज पर ले जाया जा रहा है...",
+
+
   "welcome": "स्वागत है",
   "home": "मुख्य पृष्ठ",
   "about": "के बारे में",
-  "sign_in": "साइन इन करें",
+  "sign_in": "साइन इन",
   "Location_or_Title" : "स्थान या शीर्षक . . .",
 
   "find_next": "अपना अगला",

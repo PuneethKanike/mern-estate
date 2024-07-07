@@ -199,7 +199,7 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.description}
           />
-          <input
+          <textarea
             type='text'
             placeholder='Address'
             className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'

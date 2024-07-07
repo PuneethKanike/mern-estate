@@ -183,7 +183,7 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.description}
           />
-          <input
+          <textarea
             type='text'
             placeholder='Address'
             className='p-3 rounded-lg  dark:bg-slate-900 focus:outline-none bg-slate-200'
@@ -288,7 +288,7 @@ export default function CreateListing() {
                 min='50'
                 max='10000000'
                 required
-                className='p-3 border border-gray-300 rounded-lg dark:bg-darkblue'
+                className='p-3  rounded-lg  dark:bg-slate-900 focus:outline-none bg-slate-200'
                 onChange={handleChange}
                 value={formData.regularPrice}
               />
@@ -307,7 +307,7 @@ export default function CreateListing() {
                   min='0'
                   max='10000000'
                   required
-                  className='p-3 border border-gray-300 rounded-lg dark:bg-darkblue'
+                  className='p-3  rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                   onChange={handleChange}
                   value={formData.discountPrice}
                 />
@@ -332,7 +332,7 @@ export default function CreateListing() {
           <div className='flex gap-4'>
             <input
               onChange={(e) => setFiles(e.target.files)}
-              className='p-3 border border-gray-300 rounded w-full'
+              className='p-3 rounded w-full'
               type='file'
               id='images'
               accept='image/*'

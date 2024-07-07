@@ -1,8 +1,16 @@
 {
+  
+  "welcome_message": "ಸ್ವಾಗತ",
+  "live_link_name_1": "ಲೈವ್",
+  "live_link_name_2": "ಲಿಂಕ್ ಗೆ",
+  "redirecting_message": "ನಿಮ್ಮನ್ನು ಮುಖಪುಟಕ್ಕೆ ಕರೆದೊಯ್ಯಲಾಗುತ್ತಿದೆ...",
+
+
+  
   "welcome": "ಸ್ವಾಗತ",
   "home": "ಮುಖಪುಟ",
   "about": "ಬಗ್ಗೆ",
-  "sign_in": "ಸೈನ್ ಇನ್ ಮಾಡಿ",
+  "sign_in": "ಸೈನ್ ಇನ್",
   "Location_or_Title" : "ಸ್ಥಳ ಅಥವಾ ಶೀರ್ಷಿಕೆ . . .",
 
   "find_next": "ನಿಮ್ಮ ಮುಂದಿನ",
@@ -44,22 +52,22 @@
   "show_more_button": "ಹೆಚ್ಚು ತೋರಿಸಿ",
   "searchTerm": "ಹುಡುಕುವ ಪದ",
   "search_term_placeholder": "ಸ್ಥಳ ಅಥವಾ ಶೀರ್ಷಿಕೆ",
-  "beds": "ಹಂಚುಗಳು",
-  "beds_placeholder": "ಹಂಚುಗಳ ಸಂಖ್ಯೆ",
+  "beds": "ಮಲಗುವ ಕೋಣೆಗಳು",
+  "beds_placeholder": "ಮಲಗುವ ಕೋಣೆಗಳ ಸಂಖ್ಯೆ",
   "baths": "ಸ್ನಾನಗೃಹಗಳು",
   "baths_placeholder": "ಸ್ನಾನಗೃಹಗಳ ಸಂಖ್ಯೆ",
-  "type": "ಪ್ರಕಾರ",
+  "type": "ಮಾದರಿ",
   "type_all": "ಬಾಡಿಗೆ ಮತ್ತು ಮಾರಾಟ",
   "type_rent": "ಬಾಡಿಗೆ",
   "type_sale": "ಮಾರಾಟ",
-  "offer": "ಆಫರ್",
+  "offer": "ರಿಯಾಯಿತಿ",
   "amenities" : "ಸೌಕರ್ಯಗಳು",
   "parking": "ಪಾರ್ಕಿಂಗ್",
   "furnished": "ಸಜ್ಜುಗೊಳಿಸಿದ",
   "sort": "ವಿಂಗಡಿಸಿ",
   "sort_order": "ವಿಂಗಡಿಸಿ ಕ್ರಮ",
-  "price_high_to_low": "ಹೆಚ್ಚು ಎಂಟು ಕಡಿಮೆ",
-  "price_low_to_high": "ಕಡಿಮೆ ಎಂಟು ಹೆಚ್ಚು",
+  "price_high_to_low": "ಜಾಸ್ತಿಯಿಂದ ಕಡಿಮೆ",
+  "price_low_to_high": "ಕಡಿಮೆಯಿಂದ ಜಾಸ್ತಿ",
   "latest": "ಹೊಸದು",
   "oldest": "ಹಳೆಯದು",
   "search_button": "ಹುಡುಕಿ"

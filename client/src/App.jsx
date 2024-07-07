@@ -12,6 +12,7 @@ import CreateListing from './pages/CreateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
 import Admin from './components/Admin';
+import WelcomePage from './pages/WelcomePage';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -21,26 +22,26 @@ function App() {
     localStorage.setItem('theme', theme);
 
     // Disable right-click context menu
-    const handleContextMenu = (event) => event.preventDefault();
-    document.addEventListener('contextmenu', handleContextMenu);
+    // const handleContextMenu = (event) => event.preventDefault();
+    // document.addEventListener('contextmenu', handleContextMenu);
 
     // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-    const handleKeyDown = (event) => {
-      if (
-        event.keyCode === 123 || // F12
-        (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
-        (event.ctrlKey && event.shiftKey && event.keyCode === 74) || // Ctrl+Shift+J
-        (event.ctrlKey && event.keyCode === 85) // Ctrl+U
-      ) {
-        event.preventDefault();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
+    // const handleKeyDown = (event) => {
+    //   if (
+    //     event.keyCode === 123 || // F12
+    //     (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
+    //     (event.ctrlKey && event.shiftKey && event.keyCode === 74) || // Ctrl+Shift+J
+    //     (event.ctrlKey && event.keyCode === 85) // Ctrl+U
+    //   ) {
+    //     event.preventDefault();
+    //   }
+    // };
+    // window.addEventListener('keydown', handleKeyDown);
 
-    return () => {
-      document.removeEventListener('contextmenu', handleContextMenu);
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    // return () => {
+    //   // document.removeEventListener('contextmenu', handleContextMenu);
+    //   // window.removeEventListener('keydown', handleKeyDown);
+    // };
   }, [theme]);
 
   const toggleTheme = () => {
@@ -52,7 +53,8 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <Header theme={theme} toggleTheme={toggleTheme} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<WelcomePage />} /> 
+          <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
