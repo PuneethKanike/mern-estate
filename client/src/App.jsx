@@ -11,6 +11,7 @@ import { useState, useEffect, Suspense } from 'react';
 import CreateListing from './pages/CreateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
+import Admin from './components/Admin';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -57,6 +58,9 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/listing/:listingId" element={<Listing />} />
           <Route path="/search" element={<Search />} />
+
+          <Route path="/adminpkgowda" element={<Admin />} />
+          
           <Route element={<PrivacyRouter />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/createlisting" element={<CreateListing />} />

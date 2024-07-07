@@ -130,3 +130,25 @@ export const getListings = async (req, res, next) => {
         next(error);
     }
 };
+
+
+
+//admin
+
+export const getAllListings = async (req, res, next) => {
+  try {
+    const listings = await Listing.find();
+    return res.status(200).json(listings);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteListingById = async (req, res, next) => {
+  try {
+    await Listing.findByIdAndDelete(req.params.id);
+    res.status(200).json('Listing has been deleted!');
+  } catch (error) {
+    next(error);
+  }
+};
