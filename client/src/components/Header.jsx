@@ -33,7 +33,7 @@ function Header({ theme, toggleTheme }) {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <header className={`bg-white dark:bg-darkblue ${theme === 'dark' ? 'dark' : ''} p-3 fixed top-0 left-0 w-full z-50`}>
+      <header className={`bg-white dark:bg-darkblue ${theme === 'dark' ? 'dark' : ''} pt-2 pb-2 fixed top-0 left-0 w-full z-50`}>
         <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
           <Link to='/home'>
             <h1 className="font-bold text-sm sm:text-xl flex flex-wrap text-slate-700 dark:text-white">
@@ -42,21 +42,27 @@ function Header({ theme, toggleTheme }) {
             </h1>
           </Link>
 
-          <form onSubmit={handleSubmit} 
-          className="dark:bg-slate-900 rounded-lg flex items-center pr-3">
-            <input
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              type="text"
-              placeholder={t('Location_or_Title')}
-              className="bg-transparent p-3 rounded-lg dark:bg-slate-900 focus:outline-none w-24 sm:w-64 text-black dark:text-white border-none"
-            />
-            <button>
-              <FaSearch className='text-slate-600' />
-            </button>
-          </form>
+         <form
+  onSubmit={handleSubmit}
+  className="dark:bg-slate-900 rounded-lg flex items-center px-3 py-2"
+>
+  <input
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    type="text"
+    placeholder={t('Location_or_Title')}
+    className="bg-transparent rounded-lg dark:bg-slate-900 focus:outline-none w-20 sm:w-96 text-black dark:text-white border-none"
+  />
+  <button
+    type="submit"
+    className="flex items-center justify-center p-3 text-slate-600"
+  >
+    <FaSearch />
+  </button>
+</form>
 
-          <ul className='flex gap-4 items-center'>
+
+          <ul className='flex items-center gap-1 sm:gap-4'>
             <Link to='/home'><li className='hidden sm:inline text-slate-700 hover:underline dark:text-white'>{t('home')}</li></Link>
             <Link to='/about'><li className='hidden sm:inline text-slate-700 hover:underline dark:text-white'>{t('about')}</li></Link>
             <Link to='/profile'>
