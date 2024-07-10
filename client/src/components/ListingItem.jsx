@@ -3,8 +3,8 @@ import { MdLocationOn } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
 export default function ListingItem({ listing }) {
-  return (
-    <div className='bg-white dark:bg-slate-900 shadow-md hover:shadow-lg dark:hover:shadow-sm dark:hover:shadow-slate-500 transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]'>
+  return  (
+    <div className={`bg-white dark:bg-slate-900 shadow-md hover:shadow-lg dark:hover:shadow-sm dark:hover:shadow-slate-500 transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px] ${listing.available ? '' : 'opacity-50'}`}>
       <Link to={`/listing/${listing._id}`}>
         <img
           src={
@@ -53,8 +53,8 @@ export default function ListingItem({ listing }) {
             </div>
           </div>
          
-          <p className={`w-full max-w-[200px] text-center p-1 rounded-md ${listing.available ? 'bg-green-900 text-white' : 'bg-red-900 text-white'}`}>
-            {listing.available ? 'Available' : 'Not Available'}
+          <p className={`w-full max-w-[200px] text-center p-1 rounded-md ${listing.available ? '' : 'bg-red-900 text-white'}`}>
+            {listing.available ? '' : 'Currently not available'}
           </p>
         </div>
       </Link>

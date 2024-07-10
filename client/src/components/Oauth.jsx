@@ -4,8 +4,11 @@ import { app } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { signInSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Oauth() {
+
+    const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -41,7 +44,7 @@ export default function Oauth() {
       type='button'
       className='bg-red-700 text-white p-3 rounded-lg flex items-center justify-center uppercase hover:opacity-95'
     >
-      <span className='mr-2'>Continue with Google</span>
+      <span className='mr-2'>{t('with_google')}</span>
       <FaGoogle className='text-2xl' />
     </button>
   );

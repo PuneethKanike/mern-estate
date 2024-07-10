@@ -174,7 +174,7 @@ function Header({ theme, toggleTheme }) {
           </nav>
         </div>
       )}
-    </header>
+    </header> 
   );
 }
 

@@ -17,6 +17,7 @@ import WelcomePage from './pages/WelcomePage';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  
 
   useEffect(() => {
     document.body.className = theme;

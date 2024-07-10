@@ -108,7 +108,11 @@ export default function Listing() {
                 <p className='bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
                   ₹{+listing.regularPrice - +listing.discountPrice} Saved
                 </p>
+                
               )}
+              <p className={`w-full max-w-[200px] text-center p-1 rounded-md ${listing.available ? '' : 'bg-red-900 text-white'}`}>
+              {listing.available ? '' : 'Currently not available'}
+            </p>
             </div>
             <p className='text-slate-800 dark:text-white'>
               <span className='font-semibold text-black dark:text-slate-400'>Description - </span>

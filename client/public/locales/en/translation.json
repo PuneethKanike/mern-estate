@@ -11,6 +11,9 @@
   "sign_in": "Sign In",
   "Location_or_Title" : "Location or Title . . .",
 
+
+  "all_rights_reserved": "All rights reserved.",
+
   "find_next": "Find your next",
   "perfect": "perfect",
   "place_with_ease": "place with ease",
@@ -68,7 +71,46 @@
   "price_low_to_high": "Price low to high",
   "latest": "Latest",
   "oldest": "Oldest",
-  "search_button": "Search"
+  "search_button": "Search",
+
+
+  "profile_title": "Profile",
+  "file_upload_error": "Error Image upload (image must be less than 2 mb)",
+  "uploading": "Uploading",
+  "upload_success": "Image successfully uploaded!",
+  "username": "Username",
+  "password": "Password",
+  "loading": "Loading...",
+  "update": "Update",
+  "create_listing": "Create Listing",
+  "delete_account": "Delete account",
+  "sign_out": "Sign out",
+  "user_update_success": "User update done",
+  "show_listings": "Show listings",
+  "show_listings_error": "Error showing listing",
+  "your_listings": "Your Listings",
+  "available": "Available",
+  "sold": "Sold",
+  "rented": "Rented",
+  "delete": "Delete",
+  "edit": "Edit",
+  "delete_confirmation": "Are you sure you want to delete?",
+
+
+
+  "no_account": "Don't have an account?",
+  "sign_up": "Sign Up",
+
+  
+
+  "have_account": "Have an account?",
+
+  "with_google" : "Continue with Google"
+
+
+
+
+  
 
 
 }

@@ -13,6 +13,8 @@
   "sign_in": "ಸೈನ್ ಇನ್",
   "Location_or_Title" : "ಸ್ಥಳ ಅಥವಾ ಶೀರ್ಷಿಕೆ . . .",
 
+  "all_rights_reserved": "ಎಲ್ಲ ಹಕ್ಕುಗಳು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
+
   "find_next": "ನಿಮ್ಮ ಮುಂದಿನ",
   "perfect": "ಅತ್ಯುತ್ತಮ",
   "place_with_ease": "ಸ್ಥಳವನ್ನು ಸುಲಭವಾಗಿ ಕಂಡುಹಿಡಿಯಿರಿ",
@@ -70,6 +72,39 @@
   "price_low_to_high": "ಕಡಿಮೆಯಿಂದ ಜಾಸ್ತಿ",
   "latest": "ಹೊಸದು",
   "oldest": "ಹಳೆಯದು",
-  "search_button": "ಹುಡುಕಿ"
+  "search_button": "ಹುಡುಕಿ",
+
+
+  "profile_title": "ಪ್ರೊಫೈಲ್",
+  "file_upload_error": "ಚಿತ್ರ ಅಪ್‌ಲೋಡ್ ದೋಷ (ಚಿತ್ರ 2 ಎಂಬರ್‌ಗಿಂತ ಕಡಿಮೆ ಇರಬೇಕು)",
+  "uploading": "ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ",
+  "upload_success": "ಚಿತ್ರವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಲಾಗಿದೆ!",
+  "username": "ಬಳಕೆದಾರ ಹೆಸರು",
+  "password": "ಪಾಸ್ವರ್ಡ್",
+  "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
+  "update": "ನವೀಕರಿಸಿ",
+  "create_listing": "ಪಟ್ಟಿ ರಚಿಸಿ",
+  "delete_account": "ಖಾತೆಯನ್ನು ಅಳಿಸಿ",
+  "sign_out": "ಸೈನ್ ಔಟ್ ಮಾಡಿ",
+  "user_update_success": "ಬಳಕೆದಾರನನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ",
+  "show_listings": "ಪಟ್ಟಿ ತೋರಿಸಿ",
+  "show_listings_error": "ಪಟ್ಟಿ ತೋರಿಸಲು ದೋಷ",
+  "your_listings": "ನಿಮ್ಮ ಪಟ್ಟಿ",
+  "available": "ಲಭ್ಯವಿದೆ",
+  "sold": "ಮಾರಾಟವಾಗಿದೆ",
+  "rented": "ಭಾಡೆಗೆ",
+  "delete": "ಅಳಿಸಿ",
+  "edit": "ಸಂಪಾದಿಸಿ",
+   "delete_confirmation": "ನೀವು ಅಳಿಸಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+
+   "no_account": "ಖಾತೆ ಇಲ್ಲವೇ?",
+  "sign_up": "ಸೈನ್ ಅಪ್ ಮಾಡಿ",
+
+ 
+ 
+  "have_account": "ಖಾತೆ ಇದೆಯೇ?",
+
+  "with_google" : "ಗೂಗಲ್ ನೊಂದಿಗೆ ಮುಂದುವರಿಯಿರಿ"
+ 
 
 }

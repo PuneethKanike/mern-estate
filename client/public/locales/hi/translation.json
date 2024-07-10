@@ -12,6 +12,8 @@
   "sign_in": "साइन इन",
   "Location_or_Title" : "स्थान या शीर्षक . . .",
 
+  "all_rights_reserved": "सभी अधिकार सुरक्षित।",
+
   "find_next": "अपना अगला",
   "perfect": "परिपूर्ण",
   "place_with_ease": "स्थान आसानी से खोजें",
@@ -69,7 +71,42 @@
   "price_low_to_high": "सस्ते से महंगे",
   "latest": "नवीनतम",
   "oldest": "सबसे पुराना",
-  "search_button": "खोजें"
+  "search_button": "खोजें",
+
+
+
+  "profile_title": "प्रोफ़ाइल",
+  "file_upload_error": "चित्र अपलोड त्रुटि (चित्र 2 एमबी से कम होना चाहिए)",
+  "uploading": "अपलोड हो रहा है",
+  "upload_success": "चित्र सफलतापूर्वक अपलोड हो गया!",
+  "username": "उपयोगकर्ता नाम",
+  "password": "पासवर्ड",
+  "loading": "लोड हो रहा है...",
+  "update": "अपडेट करें",
+  "create_listing": "लिस्टिंग बनाएं",
+  "delete_account": "खाता हटाएं",
+  "sign_out": "साइन आउट करें",
+  "user_update_success": "उपयोगकर्ता अपडेट हो गया",
+  "show_listings": "लिस्टिंग दिखाएं",
+  "show_listings_error": "लिस्टिंग दिखाने में त्रुटि",
+  "your_listings": "आपकी लिस्टिंग्स",
+  "available": "उपलब्ध",
+  "sold": "बिक चुका है",
+  "rented": "किराए पर",
+  "delete": "हटाएं",
+  "edit": "संपादित करें",
+  "delete_confirmation": "क्या आप वाकई हटाना चाहते हैं?",
+
+
+   "no_account": "कोई खाता नहीं है?",
+   
+
+   "sign_up": "साइन अप करें",
+ 
+  "have_account": "खाता है?",
+
+   "with_google" : "गूगल के साथ जारी रखें"
+
 
 
 }

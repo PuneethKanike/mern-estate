@@ -15,6 +15,8 @@ export default function Search() {
         offer: false,
         sort: 'created_at',
         order: 'desc',
+        bedrooms: 1,
+        bathrooms: 1,
         beds: '',
         baths: ''
     });
@@ -161,6 +163,8 @@ export default function Search() {
                             placeholder={t('beds_placeholder')}
                             value={sidebardata.beds}
                             onChange={handleChange}
+                            min='1'
+                            max='10'
                             className='border dark:border-none focus:outline-none rounded-lg p-3 w-full dark:bg-slate-900 dark:hover:bg-slate-800'
                         />
                     </div>
@@ -169,6 +173,8 @@ export default function Search() {
                         <input
                             type='number'
                             id='baths'
+                            min='1'
+                            max='10'
                             placeholder={t('baths_placeholder')}
                             value={sidebardata.baths}
                             onChange={handleChange}
