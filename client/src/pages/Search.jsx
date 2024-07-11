@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+import { useTranslation } from 'react-i18next';
 import ListingItem from "../components/ListingItem";
- // Path to your translation file
 
 export default function Search() {
-    const { t } = useTranslation(); // Hook to access translations
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [sidebardata, setSidebardata] = useState({
         searchTerm: '',
@@ -23,9 +22,11 @@ export default function Search() {
 
     const [loading, setLoading] = useState(false);
     const [listings, setListings] = useState([]);
-    const [showMore, setShowMore] = useState(false);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [hasNextPage, setHasNextPage] = useState(false);
+    const [hasPreviousPage, setHasPreviousPage] = useState(false);
 
-    useEffect(()=> {
+    useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
         const searchTermFromUrl = urlParams.get('searchTerm');
         const typeFromUrl = urlParams.get('type');
@@ -61,23 +62,21 @@ export default function Search() {
             })
         }
 
-        const fetchListings = async () => {
+        const fetchListings = async (page) => {
             setLoading(true);
-            setShowMore(false);
-            const searchQuery = urlParams.toString();
-            const res = await fetch(`/api/listing/get?${searchQuery}`);
+            const searchQuery = new URLSearchParams(urlParams);
+            searchQuery.set('startIndex', page * 9);
+            searchQuery.set('limit', 9);
+            const res = await fetch(`/api/listing/get?${searchQuery.toString()}`);
             const data = await res.json();
-            if (data.length > 8) {
-                setShowMore(true);
-            } else {
-                setShowMore(false);
-            }
             setListings(data);
             setLoading(false);
+            setHasNextPage(data.length === 9);
+            setHasPreviousPage(page > 0);
         };
 
-        fetchListings();
-    }, [location.search]);
+        fetchListings(currentPage);
+    }, [location.search, currentPage]);
 
     const handleChange = (e) => {
         if (
@@ -124,20 +123,15 @@ export default function Search() {
         urlParams.set('baths', sidebardata.baths);
         const searchQuery = urlParams.toString();
         navigate(`/search?${searchQuery}`);
+        setCurrentPage(0); // Reset to the first page on new search
     };
 
-    const onShowMoreClick = async () => {
-        const numberOfListings = listings.length;
-        const startIndex = numberOfListings;
-        const urlParams = new URLSearchParams(location.search);
-        urlParams.set('startIndex', startIndex);
-        const searchQuery = urlParams.toString();
-        const res = await fetch(`/api/listing/get?${searchQuery}`);
-        const data = await res.json();
-        if (data.length < 9) {
-            setShowMore(false);
-        }
-        setListings([...listings, ...data]);
+    const handleNextPage = () => {
+        setCurrentPage((prev) => prev + 1);
+    };
+
+    const handlePreviousPage = () => {
+        setCurrentPage((prev) => prev - 1);
     };
 
     return (
@@ -265,14 +259,25 @@ export default function Search() {
                             <ListingItem key={listing._id} listing={listing} />
                         ))}
 
-                    {showMore && (
-                        <button
-                            onClick={onShowMoreClick}
-                            className='text-green-700 hover:underline p-7 text-center w-full'
-                        >
-                            {t('show_more_button')}
-                        </button>
-                    )}
+                    <div className='w-full flex justify-center gap-5 mt-5'>
+                        {hasPreviousPage && (
+                            <button
+                                onClick={handlePreviousPage}
+                                className='text-green-700 hover:underline'
+                            >
+                                {t('previous_button')}
+                            </button>
+                        )}
+                        {hasNextPage && (
+                            <button
+                                onClick={handleNextPage}
+                                className='text-green-700 hover:underline'
+                            >
+                                {t('next_button')}
+                            </button>
+                        )}
+                    </div>
+
                 </div>
             </div>
         </div>

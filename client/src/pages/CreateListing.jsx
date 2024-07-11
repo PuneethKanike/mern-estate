@@ -26,13 +26,44 @@ export default function CreateListing() {
     offer: false,
     parking: false,
     furnished: false,
-    available: true, 
+    available: true,
+    link: '', // Added link field
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
+
+  const handleChange = (e) => {
+    const { id, type, value } = e.target;
+
+    if (id === 'sale' || id === 'rent') {
+      setFormData({
+        ...formData,
+        type: id,
+      });
+    } else if (id === 'parking' || id === 'furnished' || id === 'offer' || id === 'available') {
+      setFormData({
+        ...formData,
+        [id]: e.target.checked,
+      });
+    } else if (type === 'number' || type === 'text' || type === 'textarea') {
+      setFormData({
+        ...formData,
+        [id]: value,
+      });
+    } else if (id === 'link') {
+      setFormData({
+        ...formData,
+        link: value,
+      });
+    }
+  };
+
+  const isValidGoogleMapsLink = (link) => {
+    const pattern = /^https:\/\/maps\.app\.goo\.gl\/[\w-]+$/;
+    return pattern.test(link);
+  };
 
   const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -94,38 +125,6 @@ export default function CreateListing() {
     });
   };
 
-  const handleChange = (e) => {
-    if (e.target.id === 'sale' || e.target.id === 'rent') {
-      setFormData({
-        ...formData,
-        type: e.target.id,
-      });
-    }
-
-    if (
-      e.target.id === 'parking' ||
-      e.target.id === 'furnished' ||
-      e.target.id === 'offer' ||
-      e.target.id === 'available'
-    ) {
-      setFormData({
-        ...formData,
-        [e.target.id]: e.target.checked,
-      });
-    }
-
-    if (
-      e.target.type === 'number' ||
-      e.target.type === 'text' ||
-      e.target.type === 'textarea'
-    ) {
-      setFormData({
-        ...formData,
-        [e.target.id]: e.target.value,
-      });
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -133,8 +132,12 @@ export default function CreateListing() {
         return setError('You must upload at least one image');
       if (+formData.regularPrice < +formData.discountPrice)
         return setError('Discount price must be lower than regular price');
+      if (!isValidGoogleMapsLink(formData.link)) {
+        setError('Please enter a valid Google Maps link (e.g., https://maps.app.goo.gl/63dFgztHyEj8CKSV6)');
+        return;
+      }
       setLoading(true);
-      setError(false);
+      setError(false); // Clear any previous error
       const res = await fetch('/api/listing/create', {
         method: 'POST',
         headers: {
@@ -150,12 +153,13 @@ export default function CreateListing() {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`);
+      navigate(`/listing/${data._id}`); // Corrected string interpolation
     } catch (error) {
       setError(error.message);
       setLoading(false);
     }
   };
+
   return (
     <main className='p-3 pt-32 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
@@ -177,7 +181,7 @@ export default function CreateListing() {
           <textarea
             type='text'
             placeholder='Description'
-            className='p-3 rounded-lg  dark:bg-slate-900 focus:outline-none bg-slate-200'
+            className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='description'
             required
             onChange={handleChange}
@@ -186,11 +190,20 @@ export default function CreateListing() {
           <textarea
             type='text'
             placeholder='Address'
-            className='p-3 rounded-lg  dark:bg-slate-900 focus:outline-none bg-slate-200'
+            className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='address'
             required
             onChange={handleChange}
             value={formData.address}
+          />
+          <input
+            type='text'
+            placeholder='Link'
+            className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
+            id='link'
+            required
+            onChange={handleChange}
+            value={formData.link}
           />
           <div className='flex gap-6 flex-wrap'>
             <div className='flex gap-2'>
@@ -275,7 +288,7 @@ export default function CreateListing() {
                 min='1'
                 max='10'
                 required
-                className='p-3  border-gray-300 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
+                className='p-3 border-gray-300 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                 onChange={handleChange}
                 value={formData.bathrooms}
               />
@@ -288,7 +301,7 @@ export default function CreateListing() {
                 min='50'
                 max='10000000'
                 required
-                className='p-3  rounded-lg  dark:bg-slate-900 focus:outline-none bg-slate-200'
+                className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                 onChange={handleChange}
                 value={formData.regularPrice}
               />
@@ -307,13 +320,12 @@ export default function CreateListing() {
                   min='0'
                   max='10000000'
                   required
-                  className='p-3  rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
+                  className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
                   onChange={handleChange}
                   value={formData.discountPrice}
                 />
                 <div className='flex flex-col items-center'>
                   <p>Discounted price</p>
-
                   {formData.type === 'rent' && (
                     <span className='text-xs'>(₹ / month)</span>
                   )}

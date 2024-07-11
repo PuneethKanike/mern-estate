@@ -10,7 +10,7 @@ import {
   FaBath,
   FaBed,
   FaChair,
-  FaMapMarkerAlt,
+  FaMapMarkerAlt, 
   FaParking,
   FaShare,
 } from 'react-icons/fa';
@@ -100,6 +100,7 @@ export default function Listing() {
               <FaMapMarkerAlt className='text-green-700 dark:text-green-500' />
               {listing.address}
             </p>
+             <a className='text-blue-400' target="_blank" href={listing.link}>Google Map location</a>
             <div className='flex gap-4'>
               <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
                 {listing.type === 'rent' ? 'For Rent' : 'For Sale'}

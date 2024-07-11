@@ -57,7 +57,11 @@ const listingSchema = new mongoose.Schema(
     available: {
       type: Boolean,
       required: true,
-      default: true, 
+      default: true,
+    },
+    link: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }

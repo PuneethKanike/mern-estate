@@ -28,7 +28,8 @@ export default function CreateListing() {
     offer: false,
     parking: false,
     furnished: false,
-    available: false, // Added available field
+    available: false,
+    link: '',
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -49,6 +50,11 @@ export default function CreateListing() {
 
     fetchListing();
   }, []);
+
+   const isValidGoogleMapsLink = (link) => {
+    const pattern = /^https:\/\/maps\.app\.goo\.gl\/[\w-]+$/;
+    return pattern.test(link);
+  };
 
   const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -149,6 +155,10 @@ export default function CreateListing() {
         return setError('You must upload at least one image');
       if (+formData.regularPrice < +formData.discountPrice)
         return setError('Discount price must be lower than regular price');
+      if (!isValidGoogleMapsLink(formData.link)) {
+        setError('Please enter a valid Google Maps link (e.g., https://maps.app.goo.gl/63dFgztHyEj8CKSV6)');
+        return;}
+      
       setLoading(true);
       setError(false);
       const res = await fetch(`/api/listing/update/${params.listingId}`, {
@@ -207,6 +217,15 @@ export default function CreateListing() {
             required
             onChange={handleChange}
             value={formData.address}
+          />
+          <textarea
+            type='text'
+            placeholder='Link'
+            className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
+            id='link'
+            required
+            onChange={handleChange}
+            value={formData.link}
           />
           <div className='flex gap-6 flex-wrap'>
             <div className='flex gap-2'>

@@ -96,6 +96,8 @@
   "delete": "हटाएं",
   "edit": "संपादित करें",
   "delete_confirmation": "क्या आप वाकई हटाना चाहते हैं?",
+  "previous_button": "पिछला",
+    "next_button": "अगला",
 
 
    "no_account": "कोई खाता नहीं है?",
