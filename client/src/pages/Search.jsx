@@ -65,13 +65,13 @@ export default function Search() {
         const fetchListings = async (page) => {
             setLoading(true);
             const searchQuery = new URLSearchParams(urlParams);
-            searchQuery.set('startIndex', page * 9);
-            searchQuery.set('limit', 9);
+            searchQuery.set('startIndex', page * 6);
+            searchQuery.set('limit', 6);
             const res = await fetch(`/api/listing/get?${searchQuery.toString()}`);
             const data = await res.json();
             setListings(data);
             setLoading(false);
-            setHasNextPage(data.length === 9);
+            setHasNextPage(data.length === 6);
             setHasPreviousPage(page > 0);
         };
 
