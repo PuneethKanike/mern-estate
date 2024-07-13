@@ -74,7 +74,7 @@ export default function Home() {
       {/* swiper */}
       <Swiper
         navigation
-        loop
+        
         autoplay={{ delay: 3000, disableOnInteraction: false }}
       >
         {offerListings &&
