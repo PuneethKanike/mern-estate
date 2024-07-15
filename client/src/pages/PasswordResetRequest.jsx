@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -8,6 +8,38 @@ export default function PasswordResetRequest() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [otpSent, setOtpSent] = useState(false);
+  const [resendDisabled, setResendDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    let errorTimer;
+    let messageTimer;
+    let resendTimer;
+
+    if (error) {
+      errorTimer = setTimeout(() => {
+        setError('');
+      }, 4000);
+    }
+
+    if (message) {
+      messageTimer = setTimeout(() => {
+        setMessage('');
+      }, 4000);
+    }
+
+    if (resendDisabled) {
+      resendTimer = setTimeout(() => {
+        setResendDisabled(false);
+      }, 5000);
+    }
+
+    return () => {
+      clearTimeout(errorTimer);
+      clearTimeout(messageTimer);
+      clearTimeout(resendTimer);
+    };
+  }, [error, message, resendDisabled]);
 
   const handleChange = (e) => {
     setEmail(e.target.value);
@@ -15,6 +47,7 @@ export default function PasswordResetRequest() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const res = await fetch('/api/auth/request-password-reset', {
         method: 'POST',
@@ -24,6 +57,7 @@ export default function PasswordResetRequest() {
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
+      setIsLoading(false);
       if (data.success === false) {
         setError(data.message);
         return;
@@ -32,6 +66,7 @@ export default function PasswordResetRequest() {
       setError('');
       setOtpSent(true);
     } catch (error) {
+      setIsLoading(false);
       if (error.response && error.response.status === 429) {
         setError(t('too_many_requests'));
       } else {
@@ -41,6 +76,8 @@ export default function PasswordResetRequest() {
   };
 
   const handleResend = async () => {
+    setResendDisabled(true);
+    setIsLoading(true);
     try {
       const res = await fetch('/api/auth/request-password-reset', {
         method: 'POST',
@@ -50,6 +87,7 @@ export default function PasswordResetRequest() {
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
+      setIsLoading(false);
       if (data.success === false) {
         setError(data.message);
         return;
@@ -57,6 +95,7 @@ export default function PasswordResetRequest() {
       setMessage(data.message);
       setError('');
     } catch (error) {
+      setIsLoading(false);
       setError(error.message);
     }
   };
@@ -73,17 +112,24 @@ export default function PasswordResetRequest() {
           value={email}
           onChange={handleChange}
         />
-        <button className='bg-slate-700 dark:bg-blue-600 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 border-none'>
-          {t('send_otp')}
-        </button>
+        {!otpSent && (
+          <button
+            type='submit'
+            className='bg-slate-700 dark:bg-blue-600 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 border-none'
+            disabled={isLoading}
+          >
+            {isLoading ? t('loading') : t('send_otp')}
+          </button>
+        )}
       </form>
       {otpSent && (
         <div className='mt-4'>
           <button
-            className='bg-slate-700 dark:bg-blue-600 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 border-none'
+            className='bg-slate-700 dark:bg-blue-600 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-50 border-none'
             onClick={handleResend}
+            disabled={resendDisabled || isLoading}
           >
-            {t('resend_otp')}
+            {isLoading ? t('loading') : t('resend_otp')}
           </button>
         </div>
       )}

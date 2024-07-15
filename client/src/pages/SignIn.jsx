@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
@@ -12,12 +12,26 @@ export default function SignIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+
+  useEffect(() => {
+    let timer;
+    if (error) {
+      timer = setTimeout(() => {
+        dispatch(signInFailure(null));
+      }, 4000);
+    }
+    return () => clearTimeout(timer);
+  }, [error, dispatch]);
+
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

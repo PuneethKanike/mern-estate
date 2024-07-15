@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Oauth from '../components/Oauth';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,16 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let timer;
+    if (error) {
+      timer = setTimeout(() => {
+        setError(null);
+      }, 4000);
+    }
+    return () => clearTimeout(timer);
+  }, [error]);
 
   const handleChange = (e) => {
     setFormData({

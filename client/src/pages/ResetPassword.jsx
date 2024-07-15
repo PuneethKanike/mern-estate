@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +9,29 @@ export default function ResetPassword() {
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let errorTimer;
+    let messageTimer;
+
+    if (error) {
+      errorTimer = setTimeout(() => {
+        setError('');
+      }, 4000);
+    }
+
+    if (message) {
+      messageTimer = setTimeout(() => {
+        setMessage('');
+        navigate('/signin');
+      }, 4000);
+    }
+
+    return () => {
+      clearTimeout(errorTimer);
+      clearTimeout(messageTimer);
+    };
+  }, [error, message, navigate]);
 
   const handleChange = (e) => {
     setFormData({
@@ -33,9 +56,6 @@ export default function ResetPassword() {
         return;
       }
       setMessage(data.message);
-       setTimeout(() => {
-        navigate('/signin');
-      }, 3000); //
     } catch (error) {
       setError(error.message);
     }
