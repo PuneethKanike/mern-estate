@@ -7,8 +7,9 @@ router.post("/signup", signup);
 router.post("/signin", signin);
 router.post('/google', google);
 router.post('/verify-otp', verifyOtp);
-router.post('/request-password-reset', requestPasswordReset);
-router.post('/reset-password', resetPassword);
+router.post('/request-password-reset', requestPasswordReset); // Add route for requesting password reset
+router.post('/reset-password', resetPassword); // Add route for resetting password
+
 router.get('/signout', signOut);
 
 export default router;

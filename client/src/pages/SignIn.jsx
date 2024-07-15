@@ -72,7 +72,7 @@ export default function SignIn() {
         <Oauth />
       </form>
       <div className='flex gap-2 mt-5 justify-between'>
-        <Link to={'/forgot-password'}>
+        <Link to={'/request-password-reset'}>
           <span className='text-blue-700 dark:text-blue-400'>{t('forgot_password')}</span>
         </Link>
         <div className='flex gap-2'>

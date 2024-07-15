@@ -14,8 +14,9 @@ import Listing from './pages/Listing';
 import Search from './pages/Search';
 import Admin from './components/Admin';
 import WelcomePage from './pages/WelcomePage';
-import ForgotPassword from './components/ForgotPassword';
-import ResetPassword from './components/ResetPassword';
+import ResetPassword from './pages/ResetPassword';
+import PasswordResetRequest from './pages/PasswordResetRequest';
+
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -62,8 +63,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/request-password-reset" element={<PasswordResetRequest />} />
+          {/* <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} /> */}
           <Route path="/listing/:listingId" element={<Listing />} />
           <Route path="/search" element={<Search />} />
 
