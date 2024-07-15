@@ -6,13 +6,9 @@ import Oauth from '../components/Oauth';
 import { useTranslation } from 'react-i18next';
 
 export default function SignIn() {
-
   const { t } = useTranslation();
-
-
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -37,54 +33,56 @@ export default function SignIn() {
       const data = await res.json();
       console.log(data);
       if (data.success === false) {
-        dispatch(signInFailure(data.message));  
+        dispatch(signInFailure(data.message));
         return;
       }
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
   };
 
-
-
   return (
-  <div className='p-3 pt-36 max-w-lg mx-auto'>
-    <h1 className='text-3xl text-center font-semibold my-7 dark:text-white uppercase'>{t('sign_in')}</h1>
-    <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-      <input
-        required
-        type='email'
-        placeholder={t('email')}
-        className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
-        id='email'
-        onChange={handleChange}
-      />
-      <input
-        type='password'
-        placeholder={t('password')}
-        className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
-        id='password'
-        required
-        onChange={handleChange}
-      />
-      <button
-        disabled={loading}
-        className='bg-slate-700 dark:bg-blue-600 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 border-none'
-      >
-        {loading ? t('loading') : t('sign_in')}
-      </button>
-      <Oauth />
-    </form>
-    <div className='flex gap-2 mt-5'>
-      <p className='dark:text-white'>{t('no_account')}</p>
-      <Link to={'/signup'}>
-        <span className='text-blue-700 dark:text-blue-400'>{t('sign_up')}</span>
-      </Link>
+    <div className='p-3 pt-36 max-w-lg mx-auto'>
+      <h1 className='text-3xl text-center font-semibold my-7 dark:text-white uppercase'>{t('sign_in')}</h1>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+        <input
+          required
+          type='email'
+          placeholder={t('email')}
+          className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
+          id='email'
+          onChange={handleChange}
+        />
+        <input
+          type='password'
+          placeholder={t('password')}
+          className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
+          id='password'
+          required
+          onChange={handleChange}
+        />
+        <button
+          disabled={loading}
+          className='bg-slate-700 dark:bg-blue-600 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 border-none'
+        >
+          {loading ? t('loading') : t('sign_in')}
+        </button>
+        <Oauth />
+      </form>
+      <div className='flex gap-2 mt-5 justify-between'>
+        <Link to={'/forgot-password'}>
+          <span className='text-blue-700 dark:text-blue-400'>{t('forgot_password')}</span>
+        </Link>
+        <div className='flex gap-2'>
+          <p className='dark:text-white'>{t('no_account')}</p>
+          <Link to={'/signup'}>
+            <span className='text-blue-700 dark:text-blue-400'>{t('sign_up')}</span>
+          </Link>
+        </div>
+      </div>
+      {error && <p className='text-red-500 mt-5'>{error}</p>}
     </div>
-    {error && <p className='text-red-500 mt-5'>{error}</p>}
-  </div>
-);
-
+  );
 }

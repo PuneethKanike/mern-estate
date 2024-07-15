@@ -94,6 +94,54 @@ export const signin = async (req, res, next) => {
   }
 };
 
+
+export const requestPasswordReset = async (req, res, next) => {
+  const { email } = req.body;
+  
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return next(errorHandler(404, 'User not found!'));
+    }
+
+    const otp = generateOTP();
+    user.otp = otp;
+    user.otpExpires = new Date(Date.now() + 10 * 60 * 1000); // OTP expires in 10 minutes
+    await user.save();
+
+    await sendOTPEmail(email, otp);
+
+    res.status(200).json({ message: 'OTP sent to your email!' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const resetPassword = async (req, res, next) => {
+  const { email, otp, newPassword } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return next(errorHandler(404, 'User not found!'));
+    }
+
+    if (user.otp !== otp || user.otpExpires < Date.now()) {
+      return next(errorHandler(400, 'Invalid or expired OTP!'));
+    }
+
+    user.password = bcryptjs.hashSync(newPassword, 10);
+    user.otp = undefined;
+    user.otpExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ message: 'Password reset successful!' });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });

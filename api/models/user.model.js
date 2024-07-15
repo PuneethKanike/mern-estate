@@ -11,8 +11,10 @@ const UserSchema = new mongoose.Schema(
       default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
     },
     otpExpires: { type: Date },
-    otpVerified: { type: Boolean, default: false }, // OTP verification status
-    fullyVerified: { type: Boolean, default: false }, // New field for complete verification
+    otpVerified: { type: Boolean, default: false },
+    fullyVerified: { type: Boolean, default: false },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
   },
   { timestamps: true }
 );
