@@ -81,7 +81,7 @@ export const verifyOtp = async (req, res, next) => {
     user.fullyVerified = true; // Mark the user as fully verified
     await user.save();
 
-    res.status(200).json({ message: 'OTP verified successfully! You can now sign in.' });
+    res.status(200).json({ message: 'OTP verified successfully! Redirecting to signin' });
   } catch (error) {
     next(error);
   }

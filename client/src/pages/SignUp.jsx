@@ -11,6 +11,8 @@ export default function SignUp() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
+  const [otpMessage, setOtpMessage] = useState(null);
+  const [otpVerifiedMessage, setOtpVerifiedMessage] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function SignUp() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -50,6 +52,8 @@ export default function SignUp() {
       setLoading(false);
       setError(null);
       setOtpSent(true);
+      setOtpMessage('OTP sent successfully.'); // Set OTP message
+      setTimeout(() => setOtpMessage(null), 4000); // Clear OTP message after 4 seconds
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -75,7 +79,11 @@ export default function SignUp() {
       }
       setLoading(false);
       setError(null);
-      navigate('/signin');
+      setOtpVerifiedMessage('OTP verified successfully!. Redirecting to signin'); 
+      setTimeout(() => {
+        setOtpVerifiedMessage(null); // Clear OTP verified message after 3 seconds
+        navigate('/signin');
+      }, 3000);
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -93,6 +101,7 @@ export default function SignUp() {
             placeholder={t('otp')}
             className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
             id='otp'
+            value={otp}
             onChange={(e) => setOtp(e.target.value)}
           />
           <button
@@ -102,7 +111,9 @@ export default function SignUp() {
             {loading ? t('loading') : t('Submit OTP')}
           </button>
         </form>
+        {otpMessage && <p className='text-green-500 dark:text-green-400 mt-5'>{otpMessage}</p>}
         {error && <p className='text-red-500 dark:text-red-400 mt-5'>{error}</p>}
+        {otpVerifiedMessage && <p className='text-green-500 dark:text-green-400 mt-5'>{otpVerifiedMessage}</p>}
       </div>
     );
   }
@@ -117,6 +128,7 @@ export default function SignUp() {
           placeholder={t('username')}
           className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
           id='username'
+          name='username'
           onChange={handleChange}
         />
         <input
@@ -125,6 +137,7 @@ export default function SignUp() {
           placeholder={t('email')}
           className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
           id='email'
+          name='email'
           onChange={handleChange}
         />
         <input
@@ -133,6 +146,7 @@ export default function SignUp() {
           placeholder={t('password')}
           className='border p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white border-none'
           id='password'
+          name='password'
           onChange={handleChange}
         />
         <button
