@@ -107,7 +107,66 @@
  
   "have_account": "खाता है?",
 
-   "with_google" : "गूगल के साथ जारी रखें"
+   "with_google" : "गूगल के साथ जारी रखें",
+
+   "forgot_password": "पासवर्ड भूल गए",
+
+    "reset_password": "पासवर्ड रीसेट करें",
+
+    "send_otp": "ओटीपी भेजें",
+
+    "go_to_reset_password": "रीसेट पासवर्ड पर जाएं",
+
+    "otp": "ओटीपी",
+    "new_password": "नया पासवर्ड",
+    "resend_otp": "ओटीपी फिर से भेजें",
+    "clear_button": "साफ़ करें",
+    "month": "महीना",
+
+
+    "Loading...": "लोड हो रहा है...",
+  "Something_went_wrong!": "कुछ गड़बड़ हो गई!",
+  "Link_copied!": "लिंक कॉपी किया गया!",
+  "For_rent": "किराए पर देने के लिए",
+  "For_sale": "बिक्री के लिए",
+  "Google_Map_location": "गूगल मानचित्र स्थान",
+  "Currently_not_available": "वर्तमान में उपलब्ध नहीं है",
+  "Description": "विवरण",
+  "bath": "स्नान",
+  "Parking_spot": "पार्किंग स्थान",
+  "No_Parking": "कोई पार्किंग नहीं",
+  "Furnished": "सजावटी",
+  "Unfurnished": "असजावटी",
+  "Contact_landlord": "मकानमालिक से संपर्क करें",
+  "Saved": "बचाया गया",
+
+
+   "Create_a_Listing": "लिस्टिंग बनाएं",
+  "Name": "नाम",
+  "Address": "पता",
+  "Link": "लिंक",
+  "Sell": "बेचना",
+  "Rent": "किराए पर",
+  "Offer": "प्रस्ताव",
+  "Available": "उपलब्ध",
+  "Beds": "बिस्तर",
+  "Baths": "स्नानघर",
+  "Regular_price": "नियमित मूल्य",
+  "Discounted_price": "छूट मूल्य",
+  "Images": "चित्र",
+  "The_first_image_will_be_the_cover": "पहली छवि कवर होगी",
+  "Uploading": "अपलोड हो रहा है...",
+  "Upload": "अपलोड करें",
+  "Listing_image": "लिस्टिंग छवि",
+  "Delete": "हटाएं",
+  "Creating": "बना रहा है...",
+  "Create_listing": "लिस्टिंग बनाएं",
+  "You_must_upload_at_least_one_image": "आपको कम से कम एक छवि अपलोड करनी होगी",
+  "Discount_price_must_be_lower_than_regular_price": "छूट मूल्य नियमित मूल्य से कम होना चाहिए",
+  "Please_enter_a_valid_Google_Maps_link": "कृपया एक मान्य Google Maps लिंक दर्ज करें (उदाहरण: https://maps.app.goo.gl/63dFgztHyEj8CKSV6)",
+
+  "oops" :"ओह! आप जिस पेज को खोज रहे हैं वह मौजूद नहीं है।",
+  "gotohome" : "मुखपृष्ठ प्र जाएं"
 
 
 

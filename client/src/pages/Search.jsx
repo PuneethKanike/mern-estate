@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ListingItem from "../components/ListingItem";
+import { ClipLoader } from 'react-spinners'; // Import the spinner component
 
 export default function Search() {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const [sidebardata, setSidebardata] = useState({
+    const initialSidebarData = {
         searchTerm: '',
         type: 'all',
         parking: false,
@@ -14,11 +15,11 @@ export default function Search() {
         offer: false,
         sort: 'created_at',
         order: 'desc',
-        bedrooms: 1,
-        bathrooms: 1,
         beds: '',
         baths: ''
-    });
+    };
+
+    const [sidebardata, setSidebardata] = useState(initialSidebarData);
 
     const [loading, setLoading] = useState(false);
     const [listings, setListings] = useState([]);
@@ -126,6 +127,12 @@ export default function Search() {
         setCurrentPage(0); // Reset to the first page on new search
     };
 
+    const handleClear = () => {
+        setSidebardata(initialSidebarData);
+        navigate('/search'); // Reset the URL to the initial state
+        setCurrentPage(0); // Reset to the first page
+    };
+
     const handleNextPage = () => {
         setCurrentPage((prev) => prev + 1);
     };
@@ -216,7 +223,7 @@ export default function Search() {
                             <span>{t('parking')}</span>
                         </div>
                         <div className='flex gap-2'>
-                            <input type='checkbox' id='furnished' className='w-5' 
+                            <input type='checkbox' id='furnished' className='w-5'
                                 onChange={handleChange}
                                 checked={sidebardata.furnished}
                             />
@@ -227,38 +234,40 @@ export default function Search() {
                         <label className='font-semibold'>{t('sort')}</label>
                         <select id='sort_order' className='border dark:border-none focus:outline-none rounded-lg p-3 dark:bg-slate-900 dark:hover:bg-slate-800'
                             onChange={handleChange}
-                            defaultValue={'created_at_desc'}
+                            value={`${sidebardata.sort}_${sidebardata.order}`}
                         >
                             <option value='regularPrice_desc'>{t('price_high_to_low')}</option>
                             <option value='regularPrice_asc'>{t('price_low_to_high')}</option>
-
                             <option value='createdAt_desc'>{t('latest')}</option>
                             <option value='createdAt_asc'>{t('oldest')}</option>
                         </select>
                     </div>
-                    <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
-                        {t('search_button')}
-                    </button>
+                    <div className='flex gap-4'>
+                        <button type='submit' className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
+                            {t('search_button')}
+                        </button>
+                        <button type='button' onClick={handleClear} className='bg-red-500 text-white p-3 rounded-lg uppercase hover:opacity-95'>
+                            {t('clear_button')}
+                        </button>
+                    </div>
                 </form>
             </div>
             <div className='flex-1'>
                 <h1 className='text-3xl font-semibold p-3 text-slate-700 mt-5 dark:text-slate-400'>{t('search_title')}</h1>
                 <div className='p-7 flex flex-wrap gap-4'>
+                    {loading && (
+                        <div className='flex justify-center items-center w-full'>
+                            <ClipLoader color='#4A90E2' loading={loading} size={50} />
+                        </div>
+                    )}
                     {!loading && listings.length === 0 && (
                         <p className='text-xl text-slate-700'>{t('no_listings_found')}</p>
                     )}
-                    {loading && (
-                        <p className='text-xl text-slate-700 text-center w-full'>
-                            {t('loading_text')}
-                        </p>
-                    )}
-
                     {!loading &&
                         listings &&
                         listings.map((listing) => (
                             <ListingItem key={listing._id} listing={listing} />
                         ))}
-
                     <div className='w-full flex justify-center gap-5 mt-5'>
                         {hasPreviousPage && (
                             <button
@@ -277,7 +286,6 @@ export default function Search() {
                             </button>
                         )}
                     </div>
-
                 </div>
             </div>
         </div>

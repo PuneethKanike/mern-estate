@@ -7,6 +7,7 @@ import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
 import { useTranslation } from 'react-i18next';
 import Footer from '../components/Footer';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -55,39 +56,57 @@ export default function Home() {
     <div>
       {/* top */}
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
-        <h1 className='text-slate-700 dark:text-slate-400 font-bold text-3xl lg:text-6xl'>
+        <motion.h1 
+          className='text-slate-700 dark:text-slate-400 font-bold text-3xl lg:text-6xl'
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 2, delay: 1 }}
+        >
           {t('find_next')} <span className='text-slate-500 dark:text-slate-600'>{t('perfect')}</span>
           <br />
           {t('place_with_ease')}
-        </h1>
-        <div className='text-gray-400 text-xs sm:text-sm'>
-          {t('live_link_desc')}
-        </div>
-        <Link
-          to={'/search'}
-          className='text-xs sm:text-sm text-blue-800 dark:text-blue-500 font-bold hover:underline'
+        </motion.h1>
+        <motion.div 
+          className='text-gray-400 text-xs sm:text-sm'
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0, delay: 1 }}
         >
-          {t('get_started')}
-        </Link>
+          {t('live_link_desc')}
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0, delay: 1 }}
+        >
+          <Link
+            to={'/search'}
+            className='text-xs sm:text-sm text-blue-800 dark:text-blue-500 font-bold hover:underline'
+          >
+            {t('get_started')}
+          </Link>
+        </motion.div>
       </div>
 
       {/* swiper */}
       <Swiper
         navigation
-        
         autoplay={{ delay: 3000, disableOnInteraction: false }}
       >
         {offerListings &&
           offerListings.length > 0 &&
-          offerListings.map((listing) => (
+          offerListings.map((listing, index) => (
             <SwiperSlide key={listing._id}>
-              <div
+              <motion.div
                 style={{
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
                   backgroundSize: 'cover',
                 }}
                 className='h-[500px]'
-              ></div>
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 5, delay: index * 0.5 }}
+              ></motion.div>
             </SwiperSlide>
           ))}
       </Swiper>
@@ -103,8 +122,15 @@ export default function Home() {
               </Link>
             </div>
             <div className='flex flex-wrap gap-4'>
-              {offerListings.map((listing) => (
-                <ListingItem listing={listing} key={listing._id} />
+              {offerListings.map((listing, index) => (
+                <motion.div
+                  key={listing._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <ListingItem listing={listing} />
+                </motion.div>
               ))}
             </div>
           </div>
@@ -118,8 +144,15 @@ export default function Home() {
               </Link>
             </div>
             <div className='flex flex-wrap gap-4'>
-              {rentListings.map((listing) => (
-                <ListingItem listing={listing} key={listing._id} />
+              {rentListings.map((listing, index) => (
+                <motion.div
+                  key={listing._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <ListingItem listing={listing} />
+                </motion.div>
               ))}
             </div>
           </div>
@@ -133,8 +166,15 @@ export default function Home() {
               </Link>
             </div>
             <div className='flex flex-wrap gap-4'>
-              {saleListings.map((listing) => (
-                <ListingItem listing={listing} key={listing._id} />
+              {saleListings.map((listing, index) => (
+                <motion.div
+                  key={listing._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <ListingItem listing={listing} />
+                </motion.div>
               ))}
             </div>
           </div>

@@ -106,7 +106,71 @@
  
   "have_account": "ಖಾತೆ ಇದೆಯೇ?",
 
-  "with_google" : "ಗೂಗಲ್ ನೊಂದಿಗೆ ಮುಂದುವರಿಯಿರಿ"
+  "with_google" : "ಗೂಗಲ್ ನೊಂದಿಗೆ ಮುಂದುವರಿಯಿರಿ",
+
+  "forgot_password": "ಪಾಸ್ವರ್ಡ್ ಮರೆತಿರಾ",
+
+  "reset_password": "ಪಾಸ್ವರ್ಡ್ ಮರುಹೊಂದಿಸಿ",
+
+  "send_otp": "ಓಟಿಪಿ ಕಳುಹಿಸಿ",
+
+  "go_to_reset_password": "ಪಾಸ್ವರ್ಡ್ ಮರುಹೊಂದಿಸಲು ಹೋಗಿ",
+
+  "otp": "ಒಟಿಪಿ",
+   "new_password": "ಹೊಸ ಪಾಸ್ವರ್ಡ್",
+   "resend_otp": "ಓಟಿಪಿ ಪುನಃ ಕಳುಹಿಸಿ",
+   "clear_button": "ಸ್ಪಷ್ಟ",
+   "month": "ತಿಂಗಳು",
+
+
+   "Loading...": "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
+  "Something_went_wrong!": "ಏನೋ ತಪ್ಪಾಗಿದೆ!",
+  "Link_copied!": "ಲಿಂಕ್ ನಕಲಿಸಲಾಗಿದೆ!",
+  "For_rent": "ಬಾಡಿಗೆಗೆ",
+  "For_sale": "ಮಾರಾಟಕ್ಕೆ",
+  "Google_Map_location": "ಗೂಗಲ್ ನಕ್ಷೆ ಸ್ಥಳ",
+  "Currently_not_available": "ಪ್ರಸ್ತುತ ಲಭ್ಯವಿಲ್ಲ",
+  "Description": "ವಿವರಣೆ",
+  "bed": "ಬೆಂಬಲ",
+  "bath": "ಸ್ನಾನ",
+  "Parking_spot": "ಪಾರ್ಕಿಂಗ್ ಸ್ಥಳ",
+  "No_Parking": "ಪಾರ್ಕಿಂಗ್ ಇಲ್ಲ",
+  "Furnished": "ಸುಂದರವಾಗಿ ದೊಡ್ಡವಾಗಿ",
+  "Unfurnished": "ಅಸಂಪೂರ್ಣ",
+  "Contact_landlord": "ಮನೆ ಮಾಲಿಕನನ್ನು ಸಂಪರ್ಕಿಸಿ",
+  "Saved": "ಉಳಿಸಿದ",
+
+   "Create_a_Listing": "ಒಂದು ಪಟ್ಟಿ ರಚಿಸಿ",
+  "Name": "ಹೆಸರು",
+  "Address": "ವಿಳಾಸ",
+  "Link": "ಲಿಂಕ್",
+  "Sell": "ಮಾರಾಟ",
+  "Rent": "ಬಾಡಿಗೆ",
+  "Offer": "ಆಫರ್",
+  "Available": "ಲಭ್ಯವಿದೆ",
+  "Beds": "ಹಾಸಿಗೆಗಳು",
+  "Baths": "ಸ್ನಾನಗೃಹ",
+  "Regular_price": "ಸಾಮಾನ್ಯ ಬೆಲೆ",
+  "Discounted_price": "ರಿಯಾಯಿತಿ ಬೆಲೆ",
+  "Images": "ಚಿತ್ರಗಳು",
+  "The_first_image_will_be_the_cover": "ಮೊದಲ ಚಿತ್ರ ಮುಚ್ಚಳವಾಗಲಿದೆ",
+  "Uploading": "ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
+  "Upload": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+  "Listing_image": "ಪಟ್ಟಿ ಚಿತ್ರ",
+  "Delete": "ಅಳಿಸಿ",
+  "Creating": "ರಚಿಸುತ್ತಿದೆ...",
+  "Create_listing": "ಒಂದು ಪಟ್ಟಿ ರಚಿಸಿ",
+  "You_must_upload_at_least_one_image": "ನೀವು ಕನಿಷ್ಠ ಒಂದು ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಬೇಕು",
+  "Discount_price_must_be_lower_than_regular_price": "ರಿಯಾಯಿತಿ ಬೆಲೆ ಸಾಮಾನ್ಯ ಬೆಲೆಯಿಗಿಂತ ಕಡಿಮೆ ಇರಬೇಕು",
+  "Please_enter_a_valid_Google_Maps_link": "ದಯವಿಟ್ಟು ಮಾನ್ಯ Google Maps ಲಿಂಕ್ ಅನ್ನು ನಮೂದಿಸಿ (ಉದಾ: https://maps.app.goo.gl/63dFgztHyEj8CKSV6)",
+
+
+
+
  
+ "oops":"ಅಯ್ಯೋ! ನೀವು ಹುಡುಕುತ್ತಿರುವ ಪುಟವು ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ.",
+
+  "gotohome" : "ಮುಖಪುಟಕ್ಕೆ ಹೋಗಿ"
+
 
 }

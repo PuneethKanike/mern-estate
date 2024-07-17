@@ -108,7 +108,70 @@
 
   "have_account": "Have an account?",
 
-  "with_google" : "Continue with Google"
+  "with_google" : "Continue with Google",
+  "forgot_password": "Forgot Password",
+
+  "reset_password": "Reset Password",
+
+  "send_otp": "Send OTP",
+
+  "go_to_reset_password": "Go to Reset Password",
+
+   "otp": "OTP",
+   "new_password": "New Password",
+   "resend_otp": "Resend OTP",
+   "clear_button": "Clear",
+   "month": "Month",
+
+
+   "Loading...": "Loading...",
+  "Something_went_wrong!": "Something went wrong!",
+  "Link_copied!": "Link copied!",
+  "For_rent": "For rent",
+  "For_sale": "For sale",
+  "Google_Map_location": "Google Map location",
+  "Currently_not_available": "Currently not available",
+  "Description": "Description",
+  "bed": "bed",
+  "bath": "bath",
+  "Parking_spot": "Parking spot",
+  "No_Parking": "No Parking",
+  "Furnished": "Furnished",
+  "Unfurnished": "Unfurnished",
+  "Contact_landlord": "Contact landlord",
+  "Saved": "Saved",
+
+
+   "Create_a_Listing": "Create a Listing",
+  "Name": "Name",
+  "Address": "Address",
+  "Link": "Link",
+  "Sell": "Sell",
+  "Rent": "Rent",
+  "Offer": "Offer",
+  "Available": "Available",
+  "Beds": "Beds",
+  "Baths": "Baths",
+  "Regular_price": "Regular price",
+  "Discounted_price": "Discounted price",
+  "Images": "Images",
+  "The_first_image_will_be_the_cover": "The first image will be the cover",
+  "Uploading": "Uploading...",
+  "Upload": "Upload",
+  "Listing_image": "listing image",
+  "Delete": "Delete",
+  "Creating": "Creating...",
+  "Create_listing": "Create listing",
+  "You_must_upload_at_least_one_image": "You must upload at least one image",
+  "Discount_price_must_be_lower_than_regular_price": "Discount price must be lower than regular price",
+  "Please_enter_a_valid_Google_Maps_link": "Please enter a valid Google Maps link (e.g., https://maps.app.goo.gl/63dFgztHyEj8CKSV6)",
+
+  "oops" : "Oops! The page you are looking for does not exist.",
+
+   "gotohome" : "Go to homepage"
+
+
+
 
 
 

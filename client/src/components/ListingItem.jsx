@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import { MdLocationOn } from 'react-icons/md';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 export default function ListingItem({ listing }) {
-  return  (
-    <div className={`bg-white dark:bg-slate-900 shadow-md hover:shadow-lg dark:hover:shadow-sm dark:hover:shadow-slate-500 transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px] ${listing.available ? '' : 'opacity-50'}`}>
+  const { t } = useTranslation();
+
+  return (
+    <div className={`bg-white dark:bg-slate-900 shadow-md hover:shadow-lg dark:hover:shadow-sm transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px] ${listing.available ? '' : 'opacity-50'}`}>
       <Link to={`/listing/${listing._id}`}>
         <img
           src={
@@ -38,24 +41,20 @@ export default function ListingItem({ listing }) {
                   style: 'currency',
                   currency: 'INR',
                 }).replace(/₹\s?/, '')}
-            {listing.type === 'rent' && ' / month'}
+            {listing.type === 'rent' && ` / ${t('month')}`}
           </p>
           <div className='text-slate-700 flex gap-4'>
             <div className='font-bold text-xs dark:text-slate-300'>
               {listing.bedrooms > 1
-                ? `${listing.bedrooms} beds `
-                : `${listing.bedrooms} bed `}
+                ? `${listing.bedrooms} ${t('beds')} `
+                : `${listing.bedrooms} ${t('bed')} `}
             </div>
             <div className='font-bold text-xs dark:text-slate-300'>
               {listing.bathrooms > 1
-                ? `${listing.bathrooms} baths `
-                : `${listing.bathrooms} bath `}
+                ? `${listing.bathrooms} ${t('baths')} `
+                : `${listing.bathrooms} ${t('bath')} `}
             </div>
           </div>
-         
-          <p className={`w-full max-w-[200px] text-center p-1 rounded-md ${listing.available ? '' : 'bg-red-900 text-white'}`}>
-            {listing.available ? '' : 'Currently not available'}
-          </p>
         </div>
       </Link>
     </div>
