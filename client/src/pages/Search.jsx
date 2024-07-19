@@ -183,7 +183,7 @@ export default function Search() {
                         />
                     </div>
                     <div className='flex gap-2 flex-wrap items-center'>
-                        <label className='font-semibold'>{t('type')}</label>
+                        
                         <div className='flex gap-2'>
                             <input type='checkbox' id='all' className='w-5'
                                 onChange={handleChange}
@@ -214,7 +214,7 @@ export default function Search() {
                         </div>
                     </div>
                     <div className='flex gap-2 flex-wrap items-center'>
-                        <label className='font-semibold'>{t('amenities')}</label>
+                        
                         <div className='flex gap-2'>
                             <input type='checkbox' id='parking' className='w-5'
                                 onChange={handleChange}
