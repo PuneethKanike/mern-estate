@@ -187,13 +187,13 @@ export default function CreateListing() {
   return (
     <main className='p-3 pt-32 pt max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
-        Update a Listing
+        {t('Update_a_Listing')}
       </h1>
       <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
         <div className='flex flex-col gap-4 flex-1'>
           <input
             type='text'
-            placeholder='Name'
+            placeholder={t('Name')}
             className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='name'
             maxLength='62'
@@ -204,7 +204,7 @@ export default function CreateListing() {
           />
           <textarea
             type='text'
-            placeholder='Description'
+            placeholder={t('Description')}
             className=' p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='description'
             required
@@ -213,7 +213,7 @@ export default function CreateListing() {
           />
           <textarea
             type='text'
-            placeholder='Address'
+            placeholder={t('Address')}
             className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='address'
             required
@@ -222,7 +222,7 @@ export default function CreateListing() {
           />
           <textarea
             type='text'
-            placeholder='Link'
+            placeholder={t('Link')}
             className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='link'
             required
@@ -238,7 +238,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.type === 'sale'}
               />
-              <span>Sell</span>
+              <span>{t('Sell')}</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -248,7 +248,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.type === 'rent'}
               />
-              <span>Rent</span>
+              <span>{t('Rent')}</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -258,7 +258,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.parking}
               />
-              <span>Parking spot</span>
+              <span>{t('Parking_spot')}</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -268,7 +268,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.furnished}
               />
-              <span>Furnished</span>
+              <span>{t('Furnished')}</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -278,7 +278,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.offer}
               />
-              <span>Offer</span>
+              <span>{t('Offer')}</span>
             </div>
             <div className='flex gap-2'> {/* Added available checkbox */}
               <input
@@ -288,7 +288,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.available}
               />
-              <span>Available</span>
+              <span>{t('Available')}</span>
             </div>
           </div>
           <div className='flex flex-wrap gap-6'>
@@ -303,7 +303,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 value={formData.bedrooms}
               />
-              <p>Beds</p>
+              <p>{t('Beds')}</p>
             </div>
             <div className='flex items-center gap-2'>
               <input
@@ -316,7 +316,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 value={formData.bathrooms}
               />
-              <p>Baths</p>
+              <p>{t('Baths')}</p>
             </div>
             <div className='flex items-center gap-2'>
               <input
@@ -330,9 +330,9 @@ export default function CreateListing() {
                 value={formData.regularPrice}
               />
               <div className='flex flex-col items-center'>
-                <p>Regular price</p>
+                <p>{t('Regular_price')}</p>
                 {formData.type === 'rent' && (
-                  <span className='text-xs'>($ / month)</span>
+                  <span className='text-xs'>($ / {t('month')})</span>
                 )}
               </div>
             </div>
@@ -349,7 +349,7 @@ export default function CreateListing() {
                   value={formData.discountPrice}
                 />
                 <div className='flex flex-col items-center'>
-                  <p>Discounted price</p>
+                  <p>{t('Discounted_price')}</p>
                   {formData.type === 'rent' && (
                     <span className='text-xs'>($ / month)</span>
                   )}
@@ -360,9 +360,9 @@ export default function CreateListing() {
         </div>
         <div className='flex flex-col flex-1 gap-4'>
           <p className='font-semibold'>
-            Images:
+            {t('Images')}:
             <span className='font-normal text-gray-600 ml-2'>
-              The first image will be the cover (max 6)
+              {t('The_first_image_will_be_the_cover')} (max 6)
             </span>
           </p>
           <div className='flex gap-4'>
@@ -380,7 +380,7 @@ export default function CreateListing() {
               onClick={handleImageSubmit}
               className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'
             >
-              {uploading ? 'Uploading...' : 'Upload'}
+              {uploading ? t('Uploading') : t('Upload')}
             </button>
           </div>
           <p className='text-red-700 text-sm'>
@@ -394,7 +394,7 @@ export default function CreateListing() {
               >
                 <img
                   src={url}
-                  alt='listing image'
+                  alt={t('Listing_image')}
                   className='w-20 h-30 object-contain rounded-lg'
                 />
                 <button
@@ -402,7 +402,7 @@ export default function CreateListing() {
                   onClick={() => handleRemoveImage(index)}
                   className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
                 >
-                  Delete
+                  {t('Delete')}
                 </button>
               </div>
             ))}
@@ -410,7 +410,7 @@ export default function CreateListing() {
             disabled={loading || uploading}
             className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
           >
-            {loading ? 'Updating...' : 'Update listing'}
+            {loading ? t('Updating') : t('Update Listing')}
           </button>
           {error && <p className='text-red-700 text-sm'>{error}</p>}
         </div>

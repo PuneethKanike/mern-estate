@@ -83,6 +83,7 @@
   "loading": "Loading...",
   "update": "Update",
   "create_listing": "Create Listing",
+  "update_listing": "Update Listing",
   "delete_account": "Delete account",
   "sign_out": "Sign out",
   "user_update_success": "User update done",
@@ -143,6 +144,7 @@
 
 
    "Create_a_Listing": "Create a Listing",
+    "Update_a_Listing": "Update a Listing",
   "Name": "Name",
   "Address": "Address",
   "Link": "Link",
