@@ -17,6 +17,7 @@ import WelcomePage from './pages/WelcomePage';
 import ResetPassword from './pages/ResetPassword';
 import PasswordResetRequest from './pages/PasswordResetRequest';
 import NotFound from './pages/NotFound';
+import Chat from './components/Chat';
 
 
 function App() {
@@ -53,10 +54,12 @@ function App() {
 
           <Route path="/adminpkgowda" element={<Admin />} />
           
+          
           <Route element={<PrivacyRouter />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/createlisting" element={<CreateListing />} />
             <Route path="/updatelisting/:listingId" element={<UpdateListing />} />
+            <Route path="/chat" element={<Chat />} />
             
           </Route>
         </Routes>
