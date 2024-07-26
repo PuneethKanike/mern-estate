@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import EmojiPicker from 'emoji-picker-react';
 
-const socket = io('http://localhost:3000');
+const socket = io('https://mern-estate-fp7e.onrender.com');
 
 // Function to convert plain URLs to clickable links with Tailwind CSS classes for dark mode
 const linkify = (text) => {
