@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import EmojiPicker from 'emoji-picker-react';
 
@@ -27,8 +26,12 @@ const Chat = () => {
     // Fetch messages from the server
     const fetchMessages = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/chat');
-        setMessages(response.data);
+        const response = await fetch('/api/chat');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setMessages(data);
       } catch (error) {
         console.error('Error fetching messages:', error);
       }
@@ -50,7 +53,7 @@ const Chat = () => {
   }, [isAtBottom]);
 
   useEffect(() => {
-    // Scroll to bottom when messages change if the user is already at the bottom
+    
     if (isAtBottom) {
       scrollToBottom();
     }
