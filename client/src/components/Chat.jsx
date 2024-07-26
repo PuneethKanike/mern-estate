@@ -5,7 +5,6 @@ import EmojiPicker from 'emoji-picker-react';
 
 const socket = io('https://mern-estate-fp7e.onrender.com');
 
-
 const linkify = (text) => {
   const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|$!:,.;]*[-A-Z0-9+&@#/%=~_|$])/gi;
   return text.replace(urlPattern, (url) => {
@@ -18,12 +17,13 @@ const Chat = () => {
   const [message, setMessage] = useState('');
   const [isAtBottom, setIsAtBottom] = useState(true);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [replyingTo, setReplyingTo] = useState(null);
   const { currentUser } = useSelector((state) => state.user);
   const endOfMessagesRef = useRef(null);
   const chatContainerRef = useRef(null);
+  const inputRef = useRef(null); // Add ref for input element
 
   useEffect(() => {
-   
     const fetchMessages = async () => {
       try {
         const response = await fetch('/api/chat');
@@ -39,7 +39,6 @@ const Chat = () => {
 
     fetchMessages();
 
-    
     socket.on('chat message', (msg) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
       if (isAtBottom) {
@@ -53,7 +52,6 @@ const Chat = () => {
   }, [isAtBottom]);
 
   useEffect(() => {
-    
     if (isAtBottom) {
       scrollToBottom();
     }
@@ -78,14 +76,26 @@ const Chat = () => {
       minute: 'numeric',
       hour12: true,
     });
-    const msg = { username: currentUser.username, avatar: currentUser.avatar, message, timestamp };
+    const msg = {
+      username: currentUser.username,
+      avatar: currentUser.avatar,
+      message,
+      timestamp,
+      replyTo: replyingTo,
+    };
     socket.emit('chat message', msg);
     setMessage('');
-    setShowEmojiPicker(false)
+    setReplyingTo(null);
+    setShowEmojiPicker(false);
   };
 
   const onEmojiClick = (emojiData) => {
     setMessage((prevMessage) => prevMessage + emojiData.emoji);
+  };
+
+  const handleReply = (msg) => {
+    setReplyingTo(msg);
+    inputRef.current.focus(); // Focus on the input element
   };
 
   return (
@@ -99,9 +109,7 @@ const Chat = () => {
           {messages.map((msg, index) => (
             <li
               key={index}
-              className={`flex ${
-                msg.username === currentUser.username ? 'justify-end' : 'justify-start'
-              }`}
+              className={`flex ${msg.username === currentUser.username ? 'justify-end' : 'justify-start'}`}
             >
               <div
                 className={`p-2 rounded-md flex items-center max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl ${
@@ -117,15 +125,29 @@ const Chat = () => {
                 />
                 <div>
                   <div className="flex items-center mb-1">
-                    <span className="text-sm font-semibold">{msg.username}</span>
+                    <span className="text-sm font-semibold">
+                      {msg.username === currentUser.username ? 'You' : msg.username}
+                    </span>
                     <span className="ml-2 text-xs text-gray-500 dark:text-gray-300">
                       {msg.timestamp}
                     </span>
                   </div>
+                  {msg.replyTo && (
+                    <div className="bg-gray-100 dark:bg-gray-700 p-2 rounded-md mb-1 text-xs text-gray-600 dark:text-gray-300">
+                      <div className="font-semibold">{msg.replyTo.username === currentUser.username ? 'You' : msg.replyTo.username}</div>
+                      <div>{msg.replyTo.message}</div>
+                    </div>
+                  )}
                   <span
                     className="text-sm break-all"
                     dangerouslySetInnerHTML={{ __html: linkify(msg.message) }}
                   />
+                  <button
+                    className="ml-2 text-xs text-blue-500 dark:text-blue-300 hover:underline"
+                    onClick={() => handleReply(msg)}
+                  >
+                    Reply
+                  </button>
                 </div>
               </div>
             </li>
@@ -147,21 +169,37 @@ const Chat = () => {
             <EmojiPicker className='dark:bg-slate-800' onEmojiClick={onEmojiClick} />
           </div>
         )}
-        
+        {replyingTo && (
+          <div className="p-2 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-md mb-2">
+            <div className="flex justify-between items-center">
+              <div>
+                <div className="font-semibold text-sm">{replyingTo.username === currentUser.username ? 'You' : replyingTo.username}</div>
+                <div className="text-xs">{replyingTo.message}</div>
+              </div>
+              <button
+                className="text-xs text-red-500 dark:text-red-300 hover:underline"
+                onClick={() => setReplyingTo(null)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
         <form className="flex-grow flex" onSubmit={sendMessage}>
           <button
-          type="button"
-          className="p-2 bg-blue-500 text-white rounded-l-md hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onClick={() => setShowEmojiPicker((prev) => !prev)}
-        >
-          😊
-        </button>
+            type="button"
+            className="p-2 bg-blue-500 text-white rounded-l-md hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={() => setShowEmojiPicker((prev) => !prev)}
+          >
+            😊
+          </button>
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="flex-grow p-2 border border-gray-300  dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Type a message..."
+            ref={inputRef} // Attach ref to input element
           />
           <button
             type="submit"
