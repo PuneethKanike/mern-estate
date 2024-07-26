@@ -5,7 +5,7 @@ import EmojiPicker from 'emoji-picker-react';
 
 const socket = io('https://mern-estate-fp7e.onrender.com');
 
-// Function to convert plain URLs to clickable links with Tailwind CSS classes for dark mode
+
 const linkify = (text) => {
   const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|$!:,.;]*[-A-Z0-9+&@#/%=~_|$])/gi;
   return text.replace(urlPattern, (url) => {
@@ -23,7 +23,7 @@ const Chat = () => {
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
-    // Fetch messages from the server
+   
     const fetchMessages = async () => {
       try {
         const response = await fetch('/api/chat');
@@ -39,7 +39,7 @@ const Chat = () => {
 
     fetchMessages();
 
-    // Listen for new messages
+    
     socket.on('chat message', (msg) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
       if (isAtBottom) {

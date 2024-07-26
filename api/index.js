@@ -10,7 +10,7 @@ import path from 'path';
 import http from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import cors from 'cors';
-import Chat from './models/chat.model.js'; // Add this import statement
+import Chat from './models/chat.model.js'; 
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: 'http://localhost:5173' })); // Add this line to enable CORS
+app.use(cors({ origin: 'http://localhost:5173' })); 
 
 const server = http.createServer(app);
 const io = new SocketIOServer(server, {
