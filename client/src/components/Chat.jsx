@@ -158,14 +158,14 @@ const Chat = () => {
           className="text-sm break-all"
           dangerouslySetInnerHTML={{ __html: linkify(msg.message) }}
         />
-        {msg.username !== currentUser.username && ( // Only show the reply button for other users' messages
+        
           <button
             className="ml-2 text-xs text-blue-300 dark:text-blue-300 hover:underline"
             onClick={() => handleReply(msg)}
           >
             Reply
           </button>
-        )}
+       
       </div>
     </div>
   </li>
