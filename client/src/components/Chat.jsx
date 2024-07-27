@@ -3,7 +3,8 @@ import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
 import EmojiPicker from 'emoji-picker-react';
 
-const socket = io('https://mern-estate-fp7e.onrender.com');
+const socket = io('https://mern-estate-fp7e.onrender.com/');
+// https://mern-estate-fp7e.onrender.com http://localhost:3000
 
 const linkify = (text) => {
   const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|$!:,.;]*[-A-Z0-9+&@#/%=~_|$])/gi;
@@ -143,7 +144,7 @@ const Chat = () => {
                     dangerouslySetInnerHTML={{ __html: linkify(msg.message) }}
                   />
                   <button
-                    className="ml-2 text-xs text-blue-500 dark:text-blue-300 hover:underline"
+                    className="ml-2 text-xs text-blue-300 dark:text-blue-300 hover:underline"
                     onClick={() => handleReply(msg)}
                   >
                     Reply
