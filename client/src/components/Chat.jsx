@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
 import EmojiPicker from 'emoji-picker-react';
 
-const socket = io('http://localhost:3000');
+const socket = io('https://mern-estate-fp7e.onrender.com');
 
 const linkify = (text) => {
   const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|$!:,.;]*[-A-Z0-9+&@#/%=~_|$])/gi;

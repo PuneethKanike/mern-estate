@@ -25,7 +25,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: 'https://mern-estate-fp7e.onrender.com' }));
 
 const server = http.createServer(app);
 const io = new SocketIOServer(server, {
