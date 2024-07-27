@@ -3,8 +3,7 @@ import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
 import EmojiPicker from 'emoji-picker-react';
 
-const socket = io('https://mern-estate-fp7e.onrender.com/');
-// https://mern-estate-fp7e.onrender.com http://localhost:3000
+const socket = io('http://localhost:3000');
 
 const linkify = (text) => {
   const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|$!:,.;]*[-A-Z0-9+&@#/%=~_|$])/gi;
@@ -20,6 +19,7 @@ const Chat = () => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [replyingTo, setReplyingTo] = useState(null);
   const { currentUser } = useSelector((state) => state.user);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const endOfMessagesRef = useRef(null);
   const chatContainerRef = useRef(null);
   const inputRef = useRef(null); // Add ref for input element
@@ -39,7 +39,8 @@ const Chat = () => {
     };
 
     fetchMessages();
-
+    
+    
     socket.on('chat message', (msg) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
       if (isAtBottom) {
@@ -57,6 +58,20 @@ const Chat = () => {
       scrollToBottom();
     }
   }, [messages]);
+ 
+
+  useEffect(() => {
+    socket.emit('user online', { username: currentUser.username });
+
+    socket.on('online users', (users) => {
+      setOnlineUsers(users.filter(user => user.username !== currentUser.username));
+    });
+
+    return () => {
+      socket.off('online users');
+    };
+  }, [currentUser.username]);
+
 
   const handleScroll = () => {
     if (chatContainerRef.current) {
@@ -108,51 +123,54 @@ const Chat = () => {
       >
         <ul className="space-y-2">
           {messages.map((msg, index) => (
-            <li
-              key={index}
-              className={`flex ${msg.username === currentUser.username ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`p-2 rounded-md flex items-center max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl ${
-                  msg.username === currentUser.username
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-200'
-                }`}
-              >
-                <img
-                  src={msg.avatar}
-                  alt="profile"
-                  className="w-8 h-8 rounded-full mr-2"
-                />
-                <div>
-                  <div className="flex items-center mb-1">
-                    <span className="text-sm font-semibold">
-                      {msg.username === currentUser.username ? 'You' : msg.username}
-                    </span>
-                    <span className="ml-2 text-xs text-gray-500 dark:text-gray-300">
-                      {msg.timestamp}
-                    </span>
-                  </div>
-                  {msg.replyTo && (
-                    <div className="bg-gray-100 dark:bg-gray-700 p-2 rounded-md mb-1 text-xs text-gray-600 dark:text-gray-300">
-                      <div className="font-semibold">{msg.replyTo.username === currentUser.username ? 'You' : msg.replyTo.username}</div>
-                      <div>{msg.replyTo.message}</div>
-                    </div>
-                  )}
-                  <span
-                    className="text-sm break-all"
-                    dangerouslySetInnerHTML={{ __html: linkify(msg.message) }}
-                  />
-                  <button
-                    className="ml-2 text-xs text-blue-300 dark:text-blue-300 hover:underline"
-                    onClick={() => handleReply(msg)}
-                  >
-                    Reply
-                  </button>
-                </div>
-              </div>
-            </li>
-          ))}
+  <li
+    key={index}
+    className={`flex ${msg.username === currentUser.username ? 'justify-end' : 'justify-start'}`}
+  >
+    <div
+      className={`p-2 rounded-md flex items-center max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl ${
+        msg.username === currentUser.username
+          ? 'bg-blue-500 text-white'
+          : 'bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-200'
+      }`}
+    >
+      <img
+        src={msg.avatar}
+        alt="profile"
+        className="w-8 h-8 rounded-full mr-2"
+      />
+      <div>
+        <div className="flex items-center mb-1">
+          <span className="text-sm font-semibold">
+            {msg.username === currentUser.username ? 'You' : msg.username}
+          </span>
+          <span className="ml-2 text-xs text-gray-500 dark:text-gray-300">
+            {msg.timestamp}
+          </span>
+        </div>
+        {msg.replyTo && (
+          <div className="bg-gray-100 dark:bg-gray-700 p-2 rounded-md mb-1 text-xs text-gray-600 dark:text-gray-300">
+            <div className="font-semibold">{msg.replyTo.username === currentUser.username ? 'You' : msg.replyTo.username}</div>
+            <div>{msg.replyTo.message}</div>
+          </div>
+        )}
+        <span
+          className="text-sm break-all"
+          dangerouslySetInnerHTML={{ __html: linkify(msg.message) }}
+        />
+        {msg.username !== currentUser.username && ( // Only show the reply button for other users' messages
+          <button
+            className="ml-2 text-xs text-blue-300 dark:text-blue-300 hover:underline"
+            onClick={() => handleReply(msg)}
+          >
+            Reply
+          </button>
+        )}
+      </div>
+    </div>
+  </li>
+))}
+
           <div ref={endOfMessagesRef} />
         </ul>
       </div>
@@ -164,6 +182,7 @@ const Chat = () => {
           ↓
         </button>
       )}
+      <p>Online Users: {onlineUsers.length}</p>
       <div className="relative">
         {showEmojiPicker && (
           <div className="absolute bottom-full mb-2">

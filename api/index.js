@@ -25,7 +25,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: 'http://localhost:5173' })); 
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 const server = http.createServer(app);
 const io = new SocketIOServer(server, {
@@ -35,8 +35,15 @@ const io = new SocketIOServer(server, {
   },
 });
 
+const onlineUsers = new Map();
+
 io.on('connection', (socket) => {
-  // console.log('a user connected');
+  console.log('a user connected');
+
+  socket.on('user online', (user) => {
+    onlineUsers.set(socket.id, user);
+    io.emit('online users', Array.from(onlineUsers.values()));
+  });
 
   socket.on('chat message', async (msg) => {
     const timestamp = new Date().toLocaleString('en-US', {
@@ -50,7 +57,9 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    // console.log('user disconnected');
+    onlineUsers.delete(socket.id);
+    io.emit('online users', Array.from(onlineUsers.values()));
+    console.log('user disconnected');
   });
 });
 
