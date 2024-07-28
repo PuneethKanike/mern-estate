@@ -26,6 +26,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({ origin: 'https://mern-estate-fp7e.onrender.com' }));
+//http://localhost:5173     https://mern-estate-fp7e.onrender.com
 
 const server = http.createServer(app);
 const io = new SocketIOServer(server, {
@@ -56,12 +57,21 @@ io.on('connection', (socket) => {
     io.emit('chat message', { ...msg, timestamp });
   });
 
+  socket.on('typing', (user) => {
+    socket.broadcast.emit('typing', user);
+  });
+
+  socket.on('stop typing', (user) => {
+    socket.broadcast.emit('stop typing', user);
+  });
+
   socket.on('disconnect', () => {
     onlineUsers.delete(socket.id);
     io.emit('online users', Array.from(onlineUsers.values()));
     console.log('user disconnected');
   });
 });
+
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
