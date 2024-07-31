@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
 import EmojiPicker from 'emoji-picker-react';
 
-const socket = io('https://mern-estate-fp7e.onrender.com');
+const socket = io('http://localhost:3000');
 
 const debounce = (func, delay) => {
   let timeout;
@@ -256,6 +256,7 @@ const Chat = () => {
             className="flex-grow p-2 border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Type a message..."
             ref={inputRef}
+            spellCheck="true" // Enable spell check
           />
           <button
             type="submit"
