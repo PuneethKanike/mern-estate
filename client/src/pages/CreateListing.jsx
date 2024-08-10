@@ -174,6 +174,7 @@ export default function CreateListing() {
             placeholder={t('Name')}
             className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='name'
+            
             maxLength='62'
             minLength='10'
             required
@@ -191,6 +192,7 @@ export default function CreateListing() {
           />
           <textarea
             type='text'
+            
             placeholder={t('Address')}
             className='p-3 rounded-lg dark:bg-slate-900 focus:outline-none bg-slate-200'
             id='address'
@@ -198,6 +200,7 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.address}
           />
+          
           <input
             type='text'
             placeholder={t('Link')}
